@@ -18,7 +18,10 @@
         "title_line2": "y Vibración",
         "subtitle": "Masajeador de tobillo con calor inalámbrico, 3 niveles de temperatura, vibración terapéutica y pantalla LED táctil — diseñado para tu comodidad diaria.",
         "cta_text": "Comprar Ahora",
+        "cta_link": "",
         "secondary_cta_text": "Saber Más",
+        "secondary_cta_link": "",
+        "hero_image": "shopify://shop_images/32f0e718c567a053cd280ba85ecce181.jpg",
         "trust_1": "Envío Gratis",
         "trust_2": "Garantía 30 Días",
         "trust_3": "Pago Seguro"
@@ -56,7 +59,12 @@
           }
         }
       },
-      "block_order": ["stat_1", "stat_2", "stat_3", "stat_4"],
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4"
+      ],
       "settings": {}
     },
     "features": {
@@ -111,7 +119,14 @@
           }
         }
       },
-      "block_order": ["feat_1", "feat_2", "feat_3", "feat_4", "feat_5", "feat_6"],
+      "block_order": [
+        "feat_1",
+        "feat_2",
+        "feat_3",
+        "feat_4",
+        "feat_5",
+        "feat_6"
+      ],
       "settings": {
         "title": "Por Qué Elegir",
         "title_highlight": "VARENAL",
@@ -126,7 +141,9 @@
           "settings": {
             "eyebrow": "Alivio Localizado",
             "title": "Terapia de Calor Profundo Que Llega a Cada Ángulo",
-            "text": "Tres niveles de calor de precisión (48°C, 53°C, 58°C) que ofrecen calor localizado exactamente donde lo necesitas. El diseño envolvente asegura cobertura total del tobillo, aliviando el dolor por largas caminatas, zapatos ajustados o fatiga diaria."
+            "text": "Tres niveles de calor de precisión (48°C, 53°C, 58°C) que ofrecen calor localizado exactamente donde lo necesitas. El diseño envolvente asegura cobertura total del tobillo, aliviando el dolor por largas caminatas, zapatos ajustados o fatiga diaria.",
+            "cta_text": "",
+            "cta_link": ""
           }
         },
         "show_2": {
@@ -134,7 +151,9 @@
           "settings": {
             "eyebrow": "Diseño Inteligente",
             "title": "Controles Intuitivos al Alcance de Tu Mano",
-            "text": "La gran pantalla LED táctil muestra la temperatura y los niveles de vibración en tiempo real. La operación con un solo toque te permite personalizar tu sesión de terapia sin complicaciones — ajusta calor y masaje con un simple toque."
+            "text": "La gran pantalla LED táctil muestra la temperatura y los niveles de vibración en tiempo real. La operación con un solo toque te permite personalizar tu sesión de terapia sin complicaciones — ajusta calor y masaje con un simple toque.",
+            "cta_text": "",
+            "cta_link": ""
           }
         },
         "show_3": {
@@ -142,11 +161,17 @@
           "settings": {
             "eyebrow": "Confort Premium",
             "title": "Transpirable, Suave con la Piel y Seguro",
-            "text": "Fabricado con tela elástica OK y forro de felpa, este masajeador inalámbrico para tobillo es suave contra tu piel. El fuerte cierre de velcro envuelve firmemente ambos tobillos, proporcionando soporte confiable todo el día."
+            "text": "Fabricado con tela elástica OK y forro de felpa, este masajeador inalámbrico para tobillo es suave contra tu piel. El fuerte cierre de velcro envuelve firmemente ambos tobillos, proporcionando soporte confiable todo el día.",
+            "cta_text": "",
+            "cta_link": ""
           }
         }
       },
-      "block_order": ["show_1", "show_2", "show_3"],
+      "block_order": [
+        "show_1",
+        "show_2",
+        "show_3"
+      ],
       "settings": {}
     },
     "how_it_works": {
@@ -174,7 +199,11 @@
           }
         }
       },
-      "block_order": ["step_1", "step_2", "step_3"],
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
       "settings": {
         "title": "Cómo",
         "title_highlight": "Funciona",
@@ -212,7 +241,11 @@
           }
         }
       },
-      "block_order": ["test_1", "test_2", "test_3"],
+      "block_order": [
+        "test_1",
+        "test_2",
+        "test_3"
+      ],
       "settings": {
         "title": "Lo Que Dicen Nuestros Clientes",
         "subtitle": "Resultados reales de personas reales que confían en VARENAL para su confort diario."
@@ -264,7 +297,14 @@
           }
         }
       },
-      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5", "faq_6"],
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6"
+      ],
       "settings": {
         "title": "Preguntas",
         "title_highlight": "Frecuentes",
@@ -277,6 +317,7 @@
         "title": "¿Listo Para Sentir la Diferencia?",
         "text": "Únete a miles que confían en VARENAL para su confort diario. Pide ahora y experimenta el alivio terapéutico para tus tobillos.",
         "cta_text": "Pedir Ahora — Envío Gratis",
+        "cta_link": "",
         "show_guarantee": true,
         "guarantee_text": "Garantía de Devolución 30 Días • Envío Gratis Mundial"
       }

@@ -14,12 +14,15 @@
     "announcement": {
       "type": "announcement-bar",
       "settings": {
-        "text": "🚚 Envío Gratis a Todo el Mundo — ¡Oferta por Tiempo Limitado!"
+        "text": "🚚 Envío Gratis a Todo el Mundo — ¡Oferta por Tiempo Limitado!",
+        "link": ""
       }
     },
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "menu": ""
+      }
     }
   },
   "order": [
