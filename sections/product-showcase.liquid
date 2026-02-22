@@ -1,0 +1,217 @@
+{% comment %}
+  VARENAL Product Showcase - Alternating image/text blocks
+{% endcomment %}
+
+<section class="showcase full-width section-padding" id="product">
+  <div class="showcase__container">
+    {% for block in section.blocks %}
+      {% assign row_mod = forloop.index0 | modulo: 2 %}
+      <div class="showcase__row {% if row_mod == 1 %}showcase__row--reverse{% endif %}" {{ block.shopify_attributes }}>
+        <div class="showcase__media">
+          {% if block.settings.image %}
+            <img
+              src="{{ block.settings.image | image_url: width: 700 }}"
+              alt="{{ block.settings.image.alt | default: block.settings.title }}"
+              width="700"
+              height="500"
+              loading="lazy"
+              class="showcase__image"
+            >
+          {% else %}
+            <div class="showcase__image-placeholder">
+              <p>Sube una imagen</p>
+            </div>
+          {% endif %}
+        </div>
+        <div class="showcase__content">
+          {% if block.settings.eyebrow != blank %}
+            <span class="showcase__eyebrow">{{ block.settings.eyebrow }}</span>
+          {% endif %}
+          <h2 class="showcase__title">{{ block.settings.title }}</h2>
+          <p class="showcase__text">{{ block.settings.text }}</p>
+          {% if block.settings.cta_text != blank %}
+            <a href="{{ block.settings.cta_link }}" class="btn btn-primary">
+              {{ block.settings.cta_text }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .showcase {
+    background: #fff;
+  }
+
+  .showcase__container {
+    max-width: min(var(--page-width), calc(100% - var(--page-margin) * 2));
+    margin: 0 auto;
+    padding: 0 var(--page-margin);
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
+
+  .showcase__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .showcase__row--reverse {
+    direction: rtl;
+  }
+
+  .showcase__row--reverse > * {
+    direction: ltr;
+  }
+
+  .showcase__media {
+    position: relative;
+  }
+
+  .showcase__image {
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    height: auto;
+    transition: transform 0.4s ease;
+  }
+
+  .showcase__image:hover {
+    transform: scale(1.02);
+  }
+
+  .showcase__image-placeholder {
+    background: #f5f5f5;
+    border-radius: 16px;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    border: 2px dashed #ddd;
+  }
+
+  .showcase__eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: 0.8rem;
+  }
+
+  .showcase__title {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    margin-bottom: 1rem;
+    line-height: 1.25;
+  }
+
+  .showcase__text {
+    font-size: 1.05rem;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 1.8rem;
+  }
+
+  @media (max-width: 768px) {
+    .showcase__row,
+    .showcase__row--reverse {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      direction: ltr;
+      text-align: center;
+    }
+
+    .showcase__container {
+      gap: 3rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product Showcase",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "showcase_block",
+      "name": "Showcase Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow text",
+          "default": "Alivio Localizado"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Terapia de Calor Profundo"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Tres niveles de calor de precisión que ofrecen calor localizado exactamente donde lo necesitas, aliviando el dolor de tobillo por largas caminatas, zapatos ajustados o fatiga diaria."
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "Button text"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Showcase",
+      "blocks": [
+        {
+          "type": "showcase_block",
+          "settings": {
+            "eyebrow": "Alivio Localizado",
+            "title": "Terapia de Calor Profundo Que Llega a Cada Ángulo",
+            "text": "Tres niveles de calor de precisión (48°C, 53°C, 58°C) que ofrecen calor localizado exactamente donde lo necesitas. El diseño envolvente asegura cobertura total del tobillo, aliviando el dolor por largas caminatas, zapatos ajustados o fatiga diaria."
+          }
+        },
+        {
+          "type": "showcase_block",
+          "settings": {
+            "eyebrow": "Diseño Inteligente",
+            "title": "Controles Intuitivos al Alcance de Tu Mano",
+            "text": "La gran pantalla LED táctil muestra la temperatura y los niveles de vibración en tiempo real. La operación con un solo toque te permite personalizar tu sesión de terapia sin complicaciones — ajusta calor y masaje con un simple toque."
+          }
+        },
+        {
+          "type": "showcase_block",
+          "settings": {
+            "eyebrow": "Confort Premium",
+            "title": "Transpirable, Suave con la Piel y Seguro",
+            "text": "Fabricado con tela elástica OK y forro de felpa, este masajeador inalámbrico para tobillo es suave contra tu piel. El fuerte cierre de velcro envuelve firmemente ambos tobillos, proporcionando soporte confiable todo el día."
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

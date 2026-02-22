@@ -1,0 +1,238 @@
+{% comment %}
+  VARENAL Features Grid - Highlight product benefits with icons
+{% endcomment %}
+
+<section class="features section-padding" id="features">
+  <div class="section-heading">
+    <h2>{{ section.settings.title | default: 'Why Choose' }} <span class="gradient-text">{{ section.settings.title_highlight | default: 'VARENAL' }}</span></h2>
+    <p>{{ section.settings.subtitle }}</p>
+  </div>
+
+  <div class="features__grid">
+    {% for block in section.blocks %}
+      <div class="features__card" {{ block.shopify_attributes }}>
+        <div class="features__icon">
+          {% case block.settings.icon %}
+            {% when 'heat' %}
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="22" stroke="url(#grad1)" stroke-width="2"/><path d="M18 30c0-4 3-6 3-10s-3-6-3-10" stroke="url(#grad1)" stroke-width="2.5" stroke-linecap="round"/><path d="M24 30c0-4 3-6 3-10s-3-6-3-10" stroke="url(#grad1)" stroke-width="2.5" stroke-linecap="round"/><path d="M30 30c0-4 3-6 3-10s-3-6-3-10" stroke="url(#grad1)" stroke-width="2.5" stroke-linecap="round"/><defs><linearGradient id="grad1" x1="0" y1="0" x2="48" y2="48"><stop stop-color="var(--color-primary)"/><stop offset="1" stop-color="var(--color-secondary)"/></linearGradient></defs></svg>
+            {% when 'timer' %}
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="26" r="18" stroke="url(#grad2)" stroke-width="2"/><path d="M24 18v8l5 5" stroke="url(#grad2)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 4h8" stroke="url(#grad2)" stroke-width="2.5" stroke-linecap="round"/><defs><linearGradient id="grad2" x1="0" y1="0" x2="48" y2="48"><stop stop-color="var(--color-primary)"/><stop offset="1" stop-color="var(--color-secondary)"/></linearGradient></defs></svg>
+            {% when 'wireless' %}
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="36" r="3" fill="url(#grad3)"/><path d="M16 28a11.31 11.31 0 0 1 16 0" stroke="url(#grad3)" stroke-width="2.5" stroke-linecap="round"/><path d="M10 22a19.78 19.78 0 0 1 28 0" stroke="url(#grad3)" stroke-width="2.5" stroke-linecap="round"/><path d="M4 16a28.24 28.24 0 0 1 40 0" stroke="url(#grad3)" stroke-width="2.5" stroke-linecap="round"/><defs><linearGradient id="grad3" x1="0" y1="0" x2="48" y2="48"><stop stop-color="var(--color-primary)"/><stop offset="1" stop-color="var(--color-secondary)"/></linearGradient></defs></svg>
+            {% when 'adjustable' %}
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="22" stroke="url(#grad4)" stroke-width="2"/><path d="M16 24h16M24 16v16" stroke="url(#grad4)" stroke-width="2.5" stroke-linecap="round"/><circle cx="24" cy="24" r="6" stroke="url(#grad4)" stroke-width="2"/><defs><linearGradient id="grad4" x1="0" y1="0" x2="48" y2="48"><stop stop-color="var(--color-primary)"/><stop offset="1" stop-color="var(--color-secondary)"/></linearGradient></defs></svg>
+            {% when 'battery' %}
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="32" height="20" rx="3" stroke="url(#grad5)" stroke-width="2"/><path d="M42 21v6" stroke="url(#grad5)" stroke-width="3" stroke-linecap="round"/><rect x="10" y="18" width="12" height="12" rx="1" fill="url(#grad5)" opacity="0.3"/><path d="M22 24l4-5v4h4l-4 5v-4h-4z" fill="url(#grad5)"/><defs><linearGradient id="grad5" x1="0" y1="0" x2="48" y2="48"><stop stop-color="var(--color-primary)"/><stop offset="1" stop-color="var(--color-secondary)"/></linearGradient></defs></svg>
+            {% when 'display' %}
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="8" width="32" height="24" rx="3" stroke="url(#grad6)" stroke-width="2"/><path d="M18 36h12M24 32v4" stroke="url(#grad6)" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="20" r="4" stroke="url(#grad6)" stroke-width="2"/><defs><linearGradient id="grad6" x1="0" y1="0" x2="48" y2="48"><stop stop-color="var(--color-primary)"/><stop offset="1" stop-color="var(--color-secondary)"/></linearGradient></defs></svg>
+            {% else %}
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="22" stroke="var(--color-primary)" stroke-width="2"/><path d="M16 24l6 6 10-12" stroke="var(--color-primary)" stroke-width="2.5" stroke-linecap="round"/></svg>
+          {% endcase %}
+        </div>
+        <h3 class="features__title">{{ block.settings.title }}</h3>
+        <p class="features__text">{{ block.settings.text }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .features__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .features__card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .features__card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-brand);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+    transform-origin: left;
+  }
+
+  .features__card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(45, 181, 163, 0.1);
+    border-color: rgba(45, 181, 163, 0.2);
+  }
+
+  .features__card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .features__icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .features__icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .features__title {
+    font-family: var(--font-heading--family);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+
+  .features__text {
+    font-size: 0.92rem;
+    color: #666;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    .features__grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .features__card {
+      padding: 2rem 1.5rem;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .features__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Features Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Por Qué Elegir"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "label": "Highlighted text",
+      "default": "VARENAL"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Tecnología avanzada y confort — todo lo que necesitas para el alivio de tus tobillos en un solo dispositivo."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "heat", "label": "Heat / Temperature" },
+            { "value": "timer", "label": "Timer" },
+            { "value": "wireless", "label": "Wireless / Cordless" },
+            { "value": "adjustable", "label": "Adjustable" },
+            { "value": "battery", "label": "Battery" },
+            { "value": "display", "label": "Display / Screen" }
+          ],
+          "default": "heat"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Título del Beneficio"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Descripción del beneficio aquí."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Features Grid",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "heat",
+            "title": "3 Niveles de Calor",
+            "text": "Elige entre 48°C, 53°C o 58°C para un calor terapéutico personalizado que alivia tus tobillos cansados."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "timer",
+            "title": "Apagado Automático",
+            "text": "Temporizador integrado de 15 minutos para sesiones seguras, evitando el uso excesivo mientras te relajas sin preocupaciones."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "wireless",
+            "title": "Diseño Inalámbrico",
+            "text": "Batería recargable de 2000mAh que ofrece más de 1 hora de uso — sin cables, sin complicaciones."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "display",
+            "title": "Pantalla LED Táctil",
+            "text": "Controles táctiles intuitivos con pantalla en tiempo real de temperatura y nivel de vibración."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "adjustable",
+            "title": "Ajuste Universal",
+            "text": "Correas de velcro ajustables que se adaptan a ambos tobillos de forma segura y cómoda."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "battery",
+            "title": "Larga Duración de Batería",
+            "text": "Carga rápida de 2 horas con 4-5 sesiones completas por carga. Indicador LED muestra el estado de carga."
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

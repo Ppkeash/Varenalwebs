@@ -1,0 +1,1 @@
+C:/Users/yeval/OneDrive/Escritorio/Escritorio/My/DROPSHIPPING/2026/pagina/varenal-theme/AGENTS.md

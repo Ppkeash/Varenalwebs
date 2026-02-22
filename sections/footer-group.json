@@ -1,0 +1,30 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "t:general.footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "tagline": "Tecnología innovadora de bienestar para tu confort diario.",
+        "menu": "",
+        "col1_title": "Enlaces Rápidos",
+        "col2_title": "Soporte",
+        "newsletter_title": "Mantente al Día",
+        "newsletter_text": "Recibe ofertas exclusivas y consejos de bienestar en tu bandeja de entrada.",
+        "show_payment_icons": true
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

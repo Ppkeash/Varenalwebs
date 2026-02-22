@@ -1,0 +1,158 @@
+{% comment %}
+  VARENAL CTA Banner - Call to action section before footer
+{% endcomment %}
+
+<section class="cta-banner full-width">
+  <div class="cta-banner__inner">
+    <div class="cta-banner__content">
+      <h2 class="cta-banner__title">{{ section.settings.title }}</h2>
+      <p class="cta-banner__text">{{ section.settings.text }}</p>
+      <div class="cta-banner__actions">
+        <a href="{{ section.settings.cta_link }}" class="btn btn-primary btn-large cta-banner__btn">
+          {{ section.settings.cta_text }}
+        </a>
+      </div>
+      {% if section.settings.show_guarantee %}
+        <div class="cta-banner__guarantee">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>{{ section.settings.guarantee_text }}</span>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .cta-banner {
+    background: var(--gradient-brand);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .cta-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .cta-banner__inner {
+    max-width: min(var(--page-width), calc(100% - var(--page-margin) * 2));
+    margin: 0 auto;
+    padding: 5rem var(--page-margin);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-banner__title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+
+  .cta-banner__text {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+
+  .cta-banner__btn {
+    background: #ffffff;
+    color: var(--color-primary);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .cta-banner__btn:hover {
+    background: #ffffff;
+    color: var(--color-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .cta-banner__guarantee {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .cta-banner__inner {
+      padding: 3.5rem var(--page-margin);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "CTA Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "¿Listo Para Sentir la Diferencia?"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Únete a miles que confían en VARENAL para su confort diario. Pide ahora y experimenta el alivio terapéutico para tus tobillos."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Pedir Ahora — Envío Gratis"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_guarantee",
+      "label": "Show guarantee badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "guarantee_text",
+      "label": "Guarantee text",
+      "default": "Garantía de Devolución 30 Días • Envío Gratis Mundial"
+    }
+  ],
+  "presets": [
+    {
+      "name": "CTA Banner"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

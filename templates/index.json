@@ -1,0 +1,295 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "badge_text": "✨ Novedad — Bienestar Reimaginado",
+        "title_line1": "Alivia el Dolor de Tobillo con",
+        "title_highlight": "Calor Terapéutico",
+        "title_line2": "y Vibración",
+        "subtitle": "Masajeador de tobillo con calor inalámbrico, 3 niveles de temperatura, vibración terapéutica y pantalla LED táctil — diseñado para tu comodidad diaria.",
+        "cta_text": "Comprar Ahora",
+        "secondary_cta_text": "Saber Más",
+        "trust_1": "Envío Gratis",
+        "trust_2": "Garantía 30 Días",
+        "trust_3": "Pago Seguro"
+      }
+    },
+    "trust_bar": {
+      "type": "trust-bar",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "10,000+",
+            "label": "Clientes Felices"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "4.8 ★",
+            "label": "Valoración Media"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "30 Días",
+            "label": "Garantía de Devolución"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "number": "Gratis",
+            "label": "Envío Mundial"
+          }
+        }
+      },
+      "block_order": ["stat_1", "stat_2", "stat_3", "stat_4"],
+      "settings": {}
+    },
+    "features": {
+      "type": "features-grid",
+      "blocks": {
+        "feat_1": {
+          "type": "feature",
+          "settings": {
+            "icon": "heat",
+            "title": "3 Niveles de Calor",
+            "text": "Elige entre 48°C, 53°C o 58°C para un calor terapéutico personalizado que alivia tus tobillos cansados."
+          }
+        },
+        "feat_2": {
+          "type": "feature",
+          "settings": {
+            "icon": "timer",
+            "title": "Apagado Automático",
+            "text": "Temporizador integrado de 15 minutos para sesiones seguras, evitando el uso excesivo mientras te relajas sin preocupaciones."
+          }
+        },
+        "feat_3": {
+          "type": "feature",
+          "settings": {
+            "icon": "wireless",
+            "title": "Diseño Inalámbrico",
+            "text": "Batería recargable de 2000mAh que ofrece más de 1 hora de uso — sin cables, sin complicaciones."
+          }
+        },
+        "feat_4": {
+          "type": "feature",
+          "settings": {
+            "icon": "display",
+            "title": "Pantalla LED Táctil",
+            "text": "Controles táctiles intuitivos con pantalla en tiempo real de temperatura y nivel de vibración."
+          }
+        },
+        "feat_5": {
+          "type": "feature",
+          "settings": {
+            "icon": "adjustable",
+            "title": "Ajuste Universal",
+            "text": "Correas de velcro ajustables que se adaptan a ambos tobillos de forma segura y cómoda."
+          }
+        },
+        "feat_6": {
+          "type": "feature",
+          "settings": {
+            "icon": "battery",
+            "title": "Larga Duración de Batería",
+            "text": "Carga rápida de 2 horas con 4-5 sesiones completas por carga. Indicador LED muestra el estado de carga."
+          }
+        }
+      },
+      "block_order": ["feat_1", "feat_2", "feat_3", "feat_4", "feat_5", "feat_6"],
+      "settings": {
+        "title": "Por Qué Elegir",
+        "title_highlight": "VARENAL",
+        "subtitle": "Tecnología avanzada y confort — todo lo que necesitas para el alivio de tus tobillos en un solo dispositivo."
+      }
+    },
+    "showcase": {
+      "type": "product-showcase",
+      "blocks": {
+        "show_1": {
+          "type": "showcase_block",
+          "settings": {
+            "eyebrow": "Alivio Localizado",
+            "title": "Terapia de Calor Profundo Que Llega a Cada Ángulo",
+            "text": "Tres niveles de calor de precisión (48°C, 53°C, 58°C) que ofrecen calor localizado exactamente donde lo necesitas. El diseño envolvente asegura cobertura total del tobillo, aliviando el dolor por largas caminatas, zapatos ajustados o fatiga diaria."
+          }
+        },
+        "show_2": {
+          "type": "showcase_block",
+          "settings": {
+            "eyebrow": "Diseño Inteligente",
+            "title": "Controles Intuitivos al Alcance de Tu Mano",
+            "text": "La gran pantalla LED táctil muestra la temperatura y los niveles de vibración en tiempo real. La operación con un solo toque te permite personalizar tu sesión de terapia sin complicaciones — ajusta calor y masaje con un simple toque."
+          }
+        },
+        "show_3": {
+          "type": "showcase_block",
+          "settings": {
+            "eyebrow": "Confort Premium",
+            "title": "Transpirable, Suave con la Piel y Seguro",
+            "text": "Fabricado con tela elástica OK y forro de felpa, este masajeador inalámbrico para tobillo es suave contra tu piel. El fuerte cierre de velcro envuelve firmemente ambos tobillos, proporcionando soporte confiable todo el día."
+          }
+        }
+      },
+      "block_order": ["show_1", "show_2", "show_3"],
+      "settings": {}
+    },
+    "how_it_works": {
+      "type": "how-it-works",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Envuelve y Asegura",
+            "text": "Envuelve la almohadilla térmica alrededor de tu tobillo y asegúrala con la correa de velcro ajustable."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Elige Tu Configuración",
+            "text": "Usa la pantalla LED táctil para seleccionar tu nivel de calor y la intensidad de vibración preferidos."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Relájate y Recupera",
+            "text": "Siéntate y deja que el calor terapéutico y la vibración alivien tus tobillos. Apagado automático a los 15 minutos."
+          }
+        }
+      },
+      "block_order": ["step_1", "step_2", "step_3"],
+      "settings": {
+        "title": "Cómo",
+        "title_highlight": "Funciona",
+        "subtitle": "Empieza a sentir alivio en tres simples pasos."
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "test_1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Llevo meses con dolor de tobillo por estar de pie en el trabajo. Esta almohadilla con vibración es exactamente lo que necesitaba — ¡los 3 niveles de calor son perfectos y me encanta el diseño inalámbrico!",
+            "name": "Sara M.",
+            "verified": true
+          }
+        },
+        "test_2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Súper fácil de usar con la pantalla táctil. Me encanta que se apague automáticamente — puedo relajarme sin preocupaciones. Se ajusta perfecto a ambos tobillos. Excelente calidad por el precio.",
+            "name": "Jaime R.",
+            "verified": true
+          }
+        },
+        "test_3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Lo compré como regalo para mi mamá que camina mucho. ¡Le encanta! El forro de felpa es suave y la batería dura varias sesiones. Totalmente recomendado.",
+            "name": "María L.",
+            "verified": true
+          }
+        }
+      },
+      "block_order": ["test_1", "test_2", "test_3"],
+      "settings": {
+        "title": "Lo Que Dicen Nuestros Clientes",
+        "subtitle": "Resultados reales de personas reales que confían en VARENAL para su confort diario."
+      }
+    },
+    "faq": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "¿Cuánto dura la batería?",
+            "answer": "La batería recargable de polímero de litio de 2000mAh ofrece más de 1 hora de uso continuo, lo que equivale a unas 4-5 sesiones completas de terapia. La carga completa toma unas 2 horas con el cable USB incluido."
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "¿Cuáles son los niveles de calor?",
+            "answer": "El masajeador ofrece tres niveles de calor precisos: 48°C para calor suave, 53°C para terapia moderada y 58°C para alivio profundo. Todos se controlan fácilmente a través de la pantalla LED táctil."
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "¿Puedo usarlo en ambos tobillos?",
+            "answer": "¡Sí! El diseño con correa de velcro ajustable se adapta tanto al tobillo izquierdo como al derecho de forma segura. Envuelve completamente el tobillo para una cobertura total."
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "¿Es seguro quedarse dormido mientras lo uso?",
+            "answer": "El masajeador cuenta con un temporizador de apagado automático de 15 minutos que evita el uso excesivo y garantiza sesiones seguras incluso si te quedas dormido."
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "¿Puedo usarlo mientras se carga?",
+            "answer": "Por seguridad, el dispositivo no se puede encender mientras se carga. La luz LED blanca parpadea durante la carga y se queda fija cuando está completamente cargado."
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "¿De qué material está hecho?",
+            "answer": "Está fabricado con tela elástica OK transpirable por fuera, neopreno con 3% de tela compuesta para estructura, y un forro de felpa suave para máxima comodidad en la piel."
+          }
+        }
+      },
+      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5", "faq_6"],
+      "settings": {
+        "title": "Preguntas",
+        "title_highlight": "Frecuentes",
+        "subtitle": "Todo lo que necesitas saber sobre el Masajeador de Tobillo VARENAL."
+      }
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "title": "¿Listo Para Sentir la Diferencia?",
+        "text": "Únete a miles que confían en VARENAL para su confort diario. Pide ahora y experimenta el alivio terapéutico para tus tobillos.",
+        "cta_text": "Pedir Ahora — Envío Gratis",
+        "show_guarantee": true,
+        "guarantee_text": "Garantía de Devolución 30 Días • Envío Gratis Mundial"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "trust_bar",
+    "features",
+    "showcase",
+    "how_it_works",
+    "testimonials",
+    "faq",
+    "cta"
+  ]
+}

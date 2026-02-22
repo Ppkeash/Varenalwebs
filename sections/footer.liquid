@@ -1,0 +1,277 @@
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      {% if settings.logo %}
+        <img
+          src="{{ settings.logo | image_url: width: 140 }}"
+          alt="{{ shop.name }}"
+          width="140"
+          height="47"
+          loading="lazy"
+          class="footer__logo"
+        >
+      {% else %}
+        <span class="footer__brand-name">{{ shop.name }}</span>
+      {% endif %}
+      <p class="footer__tagline">{{ section.settings.tagline }}</p>
+    </div>
+
+    <div class="footer__links-col">
+      <h4 class="footer__heading">{{ section.settings.col1_title | default: 'Quick Links' }}</h4>
+      {% for link in section.settings.menu.links %}
+        <a href="{{ link.url }}" class="footer__link">{{ link.title }}</a>
+      {% endfor %}
+    </div>
+
+    <div class="footer__links-col">
+      <h4 class="footer__heading">{{ section.settings.col2_title | default: 'Support' }}</h4>
+      {% for link in section.settings.menu_2.links %}
+        <a href="{{ link.url }}" class="footer__link">{{ link.title }}</a>
+      {% endfor %}
+    </div>
+
+    <div class="footer__newsletter">
+      <h4 class="footer__heading">{{ section.settings.newsletter_title | default: 'Stay Updated' }}</h4>
+      <p class="footer__newsletter-text">{{ section.settings.newsletter_text | default: 'Get exclusive deals and wellness tips.' }}</p>
+      {% form 'customer', id: 'footer-newsletter' %}
+        <div class="footer__newsletter-form">
+          <input
+            type="email"
+            name="contact[email]"
+            placeholder="Tu correo electrónico"
+            required
+            class="footer__newsletter-input"
+            aria-label="Email"
+          >
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <button type="submit" class="footer__newsletter-btn">→</button>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <div class="footer__bottom-inner">
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. Todos los derechos reservados.</p>
+      {% if section.settings.show_payment_icons %}
+        <div class="footer__payment">
+          {% for type in shop.enabled_payment_types %}
+            {{ type | payment_type_svg_tag }}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</footer>
+
+{% stylesheet %}
+  .footer {
+    background: #f8fafb;
+    margin-top: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .footer__inner {
+    max-width: min(var(--page-width), calc(100% - var(--page-margin) * 2));
+    margin: 0 auto;
+    padding: 4rem var(--page-margin) 2rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 3rem;
+  }
+
+  .footer__logo {
+    margin-bottom: 1rem;
+  }
+
+  .footer__brand-name {
+    font-family: var(--font-heading--family);
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .footer__tagline {
+    color: #777;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 280px;
+  }
+
+  .footer__heading {
+    font-family: var(--font-heading--family);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    color: var(--color-foreground);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .footer__link {
+    display: block;
+    color: #666;
+    font-size: 0.9rem;
+    text-decoration: none;
+    padding: 0.3rem 0;
+    transition: color 0.3s ease;
+  }
+
+  .footer__link:hover {
+    color: var(--color-primary);
+  }
+
+  .footer__newsletter-text {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .footer__newsletter-form {
+    display: flex;
+    border-radius: 50px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    background: #fff;
+  }
+
+  .footer__newsletter-input {
+    flex: 1;
+    border: none;
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+    outline: none;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  .footer__newsletter-btn {
+    background: var(--gradient-brand);
+    border: none;
+    color: #fff;
+    padding: 0.7rem 1.2rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: opacity 0.3s ease;
+  }
+
+  .footer__newsletter-btn:hover {
+    opacity: 0.85;
+  }
+
+  .footer__bottom {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    background: #f2f4f5;
+  }
+
+  .footer__bottom-inner {
+    max-width: min(var(--page-width), calc(100% - var(--page-margin) * 2));
+    margin: 0 auto;
+    padding: 1.5rem var(--page-margin);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer__bottom-inner p {
+    font-size: 0.85rem;
+    color: #888;
+  }
+
+  .footer__payment {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .footer__payment svg {
+    height: 24px;
+    width: auto;
+  }
+
+  @media (max-width: 768px) {
+    .footer__inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 3rem var(--page-margin) 1.5rem;
+      text-align: center;
+    }
+
+    .footer__tagline {
+      max-width: none;
+      margin: 0 auto;
+    }
+
+    .footer__bottom-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .footer__newsletter-form {
+      max-width: 360px;
+      margin: 0 auto;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:general.footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Tecnología innovadora de bienestar para tu confort diario."
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:labels.menu"
+    },
+    {
+      "type": "text",
+      "id": "col1_title",
+      "label": "Column 1 title",
+      "default": "Enlaces Rápidos"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_2",
+      "label": "Support menu"
+    },
+    {
+      "type": "text",
+      "id": "col2_title",
+      "label": "Column 2 title",
+      "default": "Soporte"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Newsletter title",
+      "default": "Mantente al Día"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_text",
+      "label": "Newsletter text",
+      "default": "Recibe ofertas exclusivas y consejos de bienestar en tu bandeja de entrada."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "t:labels.show_payment_icons",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

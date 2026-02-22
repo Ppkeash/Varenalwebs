@@ -1,0 +1,188 @@
+{% comment %}
+  VARENAL How It Works - Step-by-step guide
+{% endcomment %}
+
+<section class="how-it-works section-padding" id="how-it-works">
+  <div class="section-heading">
+    <h2>{{ section.settings.title | default: 'How It' }} <span class="gradient-text">{{ section.settings.title_highlight | default: 'Works' }}</span></h2>
+    <p>{{ section.settings.subtitle }}</p>
+  </div>
+
+  <div class="hiw__grid">
+    {% for block in section.blocks %}
+      <div class="hiw__step" {{ block.shopify_attributes }}>
+        <div class="hiw__number">{{ forloop.index }}</div>
+        {% if block.settings.image %}
+          <div class="hiw__image-wrap">
+            <img
+              src="{{ block.settings.image | image_url: width: 400 }}"
+              alt="{{ block.settings.title }}"
+              width="400"
+              height="300"
+              loading="lazy"
+              class="hiw__image"
+            >
+          </div>
+        {% endif %}
+        <h3 class="hiw__title">{{ block.settings.title }}</h3>
+        <p class="hiw__text">{{ block.settings.text }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .how-it-works {
+    background: #fff;
+  }
+
+  .hiw__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2.5rem;
+    counter-reset: step;
+  }
+
+  .hiw__step {
+    text-align: center;
+    position: relative;
+    padding: 1rem;
+  }
+
+  .hiw__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--gradient-brand);
+    color: #fff;
+    font-family: var(--font-heading--family);
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 15px rgba(45, 181, 163, 0.25);
+  }
+
+  .hiw__image-wrap {
+    margin-bottom: 1.5rem;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .hiw__image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+  }
+
+  .hiw__image:hover {
+    transform: scale(1.03);
+  }
+
+  .hiw__title {
+    font-family: var(--font-heading--family);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+
+  .hiw__text {
+    font-size: 0.92rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .hiw__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "How It Works",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Cómo"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "label": "Highlighted text",
+      "default": "Funciona"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Empieza a sentir alivio en tres simples pasos."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Step image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Título del Paso"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Descripción del paso aquí."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How It Works",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Envuelve y Asegura",
+            "text": "Envuelve la almohadilla térmica alrededor de tu tobillo y asegúrala con la correa de velcro ajustable."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Elige Tu Configuración",
+            "text": "Usa la pantalla LED táctil para seleccionar tu nivel de calor y la intensidad de vibración preferidos."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Relájate y Recupera",
+            "text": "Siéntate y deja que el calor terapéutico y la vibración alivien tus tobillos. Apagado automático a los 15 minutos."
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}
