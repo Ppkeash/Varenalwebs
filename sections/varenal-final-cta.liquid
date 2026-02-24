@@ -7,6 +7,9 @@
 
 {%- liquid
   assign cta_product = section.settings.product
+  unless cta_product
+    assign cta_product = collections.all.products.first
+  endunless
   if cta_product
     assign cta_product_url = cta_product.url
     assign cta_product_image = cta_product.featured_image

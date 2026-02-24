@@ -7,6 +7,9 @@
 
 {%- liquid
   assign hero_product = section.settings.product
+  unless hero_product
+    assign hero_product = collections.all.products.first
+  endunless
   if hero_product
     assign hero_product_url = hero_product.url
     assign hero_product_image = hero_product.featured_image
