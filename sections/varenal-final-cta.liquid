@@ -2,7 +2,18 @@
   VARENAL Final CTA Section
   Last conversion block before footer.
   Deep gradient background, centered content, urgency messaging.
+  Connected to a Shopify product for dynamic data (URL, images, price).
 {% endcomment %}
+
+{%- liquid
+  assign cta_product = section.settings.product
+  if cta_product
+    assign cta_product_url = cta_product.url
+    assign cta_product_image = cta_product.featured_image
+    assign cta_product_price = cta_product.price | money
+    assign cta_product_compare = cta_product.compare_at_price
+  endif
+-%}
 
 <section id="final-cta" class="varenal-final-cta" {{ section.shopify_attributes }}>
   {%- comment -%} Background decorations {%- endcomment -%}
@@ -42,11 +53,21 @@
     {%- comment -%} Product preview {%- endcomment -%}
     <div class="final-cta__product-preview animate-on-scroll" data-delay="3">
       <div class="final-cta__product-circle">
-        {% if section.settings.product_image %}
-          {{ section.settings.product_image | image_url: width: 400 | image_tag:
+        {%- liquid
+          # Priority: 1) Manual image override, 2) Product featured image, 3) Placeholder
+          if section.settings.product_image
+            assign cta_display_image = section.settings.product_image
+            assign cta_display_alt = 'VARENAL Wireless Ankle Heating Pad'
+          elsif cta_product_image
+            assign cta_display_image = cta_product_image
+            assign cta_display_alt = cta_product_image.alt | default: cta_product.title
+          endif
+        -%}
+        {% if cta_display_image %}
+          {{ cta_display_image | image_url: width: 400 | image_tag:
             class: 'final-cta__product-img',
             loading: 'lazy',
-            alt: 'VARENAL Wireless Ankle Heating Pad'
+            alt: cta_display_alt
           }}
         {% else %}
           <div class="final-cta__product-placeholder">
@@ -54,6 +75,18 @@
           </div>
         {% endif %}
       </div>
+
+      {%- comment -%} Dynamic price badge {%- endcomment -%}
+      {% if cta_product %}
+        <div class="final-cta__price-badge">
+          {% if cta_product_compare > cta_product.price %}
+            <span class="final-cta__price-old">{{ cta_product_compare | money }}</span>
+            <span class="final-cta__price-current">{{ cta_product_price }}</span>
+          {% else %}
+            <span class="final-cta__price-current">{{ cta_product_price }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
     </div>
 
     {%- comment -%} Trust pills {%- endcomment -%}
@@ -64,9 +97,16 @@
     </div>
 
     {%- comment -%} CTA button {%- endcomment -%}
+    {%- liquid
+      if cta_product
+        assign final_cta_href = cta_product_url
+      else
+        assign final_cta_href = section.settings.cta_url | default: '#'
+      endif
+    -%}
     <div class="final-cta__action animate-on-scroll" data-delay="5">
       <a
-        href="{{ section.settings.cta_url | default: '#' }}"
+        href="{{ final_cta_href }}"
         class="btn-varenal-primary final-cta__btn"
         id="final-cta-btn"
       >
@@ -191,6 +231,28 @@
     height: 100%;
   }
 
+  /* Price badge */
+  .final-cta__price-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .final-cta__price-current {
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-weight: 800;
+    font-size: 28px;
+    color: var(--color-primary, #00B4C8);
+  }
+
+  .final-cta__price-old {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: line-through;
+  }
+
   /* Trust pills */
   .final-cta__trust-pills {
     display: flex;
@@ -308,6 +370,11 @@
   "class": "varenal-final-cta-section",
   "settings": [
     {
+      "type": "product",
+      "id": "product",
+      "label": "Producto"
+    },
+    {
       "type": "text",
       "id": "badge_text",
       "label": "Badge text",
@@ -328,7 +395,8 @@
     {
       "type": "image_picker",
       "id": "product_image",
-      "label": "Product image"
+      "label": "Imagen override (opcional)",
+      "info": "Si no seleccionas una imagen, se usará la imagen principal del producto"
     },
     {
       "type": "text",

@@ -2,7 +2,18 @@
   VARENAL Hero Section
   Premium conversion-focused hero with 2-column split layout.
   Mobile-first: image first on mobile, text first on desktop.
+  Connected to a Shopify product for dynamic data (URL, images, price).
 {% endcomment %}
+
+{%- liquid
+  assign hero_product = section.settings.product
+  if hero_product
+    assign hero_product_url = hero_product.url
+    assign hero_product_image = hero_product.featured_image
+    assign hero_product_price = hero_product.price | money
+    assign hero_product_compare = hero_product.compare_at_price
+  endif
+-%}
 
 <div id="scroll-sentinel" style="position:absolute;top:200px;width:1px;height:1px;"></div>
 
@@ -15,11 +26,21 @@
     <div class="varenal-hero__image-col" data-hero-animate="image">
       <div class="varenal-hero__image-wrap">
         <div class="varenal-hero__image-glow" aria-hidden="true"></div>
-        {% if section.settings.hero_image %}
-          {{ section.settings.hero_image | image_url: width: 1200 | image_tag:
+        {%- liquid
+          # Priority: 1) Manual image override, 2) Product featured image, 3) Placeholder
+          if section.settings.hero_image
+            assign display_image = section.settings.hero_image
+            assign display_alt = section.settings.hero_image.alt | default: 'VARENAL Wireless Ankle Heating Pad'
+          elsif hero_product_image
+            assign display_image = hero_product_image
+            assign display_alt = hero_product_image.alt | default: hero_product.title
+          endif
+        -%}
+        {% if display_image %}
+          {{ display_image | image_url: width: 1200 | image_tag:
             class: 'varenal-hero__image',
             loading: 'eager',
-            alt: 'VARENAL Wireless Ankle Heating Pad'
+            alt: display_alt
           }}
         {% else %}
           <div class="varenal-hero__image-placeholder">
@@ -77,9 +98,31 @@
       </div>
 
       {%- comment -%} 5. CTA block {%- endcomment -%}
+      {%- liquid
+        # CTA URL: product URL if product selected, else manual URL, else #
+        if hero_product
+          assign cta_href = hero_product_url
+        else
+          assign cta_href = section.settings.cta_primary_url | default: '#'
+        endif
+      -%}
+
+      {%- comment -%} Price badge (only if product is connected) {%- endcomment -%}
+      {% if hero_product %}
+        <div class="varenal-hero__price-block" data-hero-animate="cta">
+          {% if hero_product_compare > hero_product.price %}
+            <span class="varenal-hero__price-old">{{ hero_product_compare | money }}</span>
+            <span class="varenal-hero__price-current">{{ hero_product_price }}</span>
+            <span class="varenal-hero__price-save">-{{ hero_product_compare | minus: hero_product.price | times: 100 | divided_by: hero_product_compare }}%</span>
+          {% else %}
+            <span class="varenal-hero__price-current">{{ hero_product_price }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
+
       <div class="varenal-hero__cta-block" data-hero-animate="cta">
         <a
-          href="{{ section.settings.cta_primary_url | default: '#' }}"
+          href="{{ cta_href }}"
           class="btn-varenal-primary varenal-hero__cta-primary"
         >
           {{ section.settings.cta_primary_text | default: 'Buy Now — Get Instant Relief' }}
@@ -103,8 +146,9 @@
 
 {%- comment -%} Sticky Buy Now CTA — appears on scroll {%- endcomment -%}
 <div class="buy-now-sticky" id="buy-now-sticky">
-  <a href="{{ section.settings.cta_primary_url | default: '#' }}" class="btn-varenal-primary">
+  <a href="{{ cta_href }}" class="btn-varenal-primary">
     {{ section.settings.cta_primary_text | default: 'Buy Now — Get Instant Relief' }}
+    {% if hero_product %}<span class="buy-now-sticky__price">— {{ hero_product_price }}</span>{% endif %}
   </a>
 </div>
 
@@ -330,6 +374,41 @@
     animation: fadeInUp 0.5s ease-out 0.45s forwards;
   }
 
+  /* Price block */
+  .varenal-hero__price-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+  }
+
+  .varenal-hero__price-block.animate {
+    animation: fadeInUp 0.5s ease-out 0.4s forwards;
+  }
+
+  .varenal-hero__price-current {
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-weight: 800;
+    font-size: 32px;
+    color: var(--color-primary, #00B4C8);
+  }
+
+  .varenal-hero__price-old {
+    font-size: 20px;
+    color: var(--color-text-muted, #6B7280);
+    text-decoration: line-through;
+    opacity: 0.7;
+  }
+
+  .varenal-hero__price-save {
+    background: #FF6B35;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+
   /* Trust icons row */
   .varenal-hero__trust-row {
     display: flex;
@@ -471,9 +550,15 @@
   "class": "varenal-hero-section",
   "settings": [
     {
+      "type": "product",
+      "id": "product",
+      "label": "Producto"
+    },
+    {
       "type": "image_picker",
       "id": "hero_image",
-      "label": "Hero product image"
+      "label": "Imagen override (opcional)",
+      "info": "Si no seleccionas una imagen, se usará la imagen principal del producto"
     },
     {
       "type": "text",
