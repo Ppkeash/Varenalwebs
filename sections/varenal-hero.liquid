@@ -1,0 +1,562 @@
+{% comment %}
+  VARENAL Hero Section
+  Premium conversion-focused hero with 2-column split layout.
+  Mobile-first: image first on mobile, text first on desktop.
+{% endcomment %}
+
+<div id="scroll-sentinel" style="position:absolute;top:200px;width:1px;height:1px;"></div>
+
+<section class="varenal-hero" {{ section.shopify_attributes }}>
+  {%- comment -%} Dot-grid background pattern {%- endcomment -%}
+  <div class="varenal-hero__bg-pattern" aria-hidden="true"></div>
+
+  <div class="varenal-hero__container">
+    {%- comment -%} RIGHT: Product image — appears first on mobile {%- endcomment -%}
+    <div class="varenal-hero__image-col" data-hero-animate="image">
+      <div class="varenal-hero__image-wrap">
+        <div class="varenal-hero__image-glow" aria-hidden="true"></div>
+        {% if section.settings.hero_image %}
+          {{ section.settings.hero_image | image_url: width: 1200 | image_tag:
+            class: 'varenal-hero__image',
+            loading: 'eager',
+            alt: 'VARENAL Wireless Ankle Heating Pad'
+          }}
+        {% else %}
+          <div class="varenal-hero__image-placeholder">
+            {{ 'product-1' | placeholder_svg_tag }}
+          </div>
+        {% endif %}
+
+        {%- comment -%} Floating spec chip: bottom-left {%- endcomment -%}
+        <div class="varenal-hero__spec-chip" data-hero-animate="chip">
+          {{ section.settings.spec_chip_text | default: '3 Heat Levels • 3 Vibration Modes • 2000mAh' }}
+        </div>
+
+        {%- comment -%} Floating badge: top-right {%- endcomment -%}
+        <div class="varenal-hero__cert-badge" data-hero-animate="chip">
+          {{ section.settings.cert_badge_text | default: 'CE & RoHS ✓' }}
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} LEFT: Text content {%- endcomment -%}
+    <div class="varenal-hero__text-col">
+      {%- comment -%} 1. Urgency badge {%- endcomment -%}
+      <div data-hero-animate="badge">
+        <span class="varenal-badge varenal-hero__urgency-badge">
+          ⚡ {{ section.settings.badge_text | default: 'FREE SHIPPING — Limited Stock' }}
+        </span>
+      </div>
+
+      {%- comment -%} 2. Headline {%- endcomment -%}
+      <h1 class="varenal-hero__headline" data-hero-animate="headline">
+        {{ section.settings.headline | default: 'Your Feet Work 8 Hours. They Deserve This.' }}
+      </h1>
+
+      {%- comment -%} 3. Subheadline {%- endcomment -%}
+      <p class="varenal-hero__subheadline" data-hero-animate="subheadline">
+        {{ section.settings.subheadline | default: 'Clinically-inspired heat therapy + vibration massage for ankle pain, poor circulation & sports recovery. Cordless. Instant relief.' }}
+      </p>
+
+      {%- comment -%} 4. Social proof micro-bar {%- endcomment -%}
+      <div class="varenal-hero__social-proof" data-hero-animate="social">
+        <div class="varenal-hero__stars" aria-label="4.9 de 5 estrellas">
+          {%- for i in (1..5) -%}
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--color-primary)" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          {%- endfor -%}
+        </div>
+        <span class="varenal-hero__rating-text">
+          {{ section.settings.social_proof_text | default: '4.9/5 — 2,300+ customers' }}
+        </span>
+        <span class="varenal-hero__separator" aria-hidden="true"></span>
+        <span class="varenal-hero__guarantee">
+          ✓ {{ section.settings.guarantee_text | default: '60-Day Guarantee' }}
+        </span>
+      </div>
+
+      {%- comment -%} 5. CTA block {%- endcomment -%}
+      <div class="varenal-hero__cta-block" data-hero-animate="cta">
+        <a
+          href="{{ section.settings.cta_primary_url | default: '#' }}"
+          class="btn-varenal-primary varenal-hero__cta-primary"
+        >
+          {{ section.settings.cta_primary_text | default: 'Buy Now — Get Instant Relief' }}
+        </a>
+        <a href="#how-it-works" class="btn-varenal-ghost varenal-hero__cta-ghost">
+          {{ section.settings.cta_secondary_text | default: 'See How It Works ↓' }}
+        </a>
+      </div>
+
+      {%- comment -%} 6. Trust icons row {%- endcomment -%}
+      <div class="varenal-hero__trust-row" data-hero-animate="trust">
+        <span class="varenal-hero__trust-item">🔒 {{ section.settings.trust_text_1 | default: 'Secure Checkout' }}</span>
+        <span class="varenal-hero__trust-sep" aria-hidden="true">|</span>
+        <span class="varenal-hero__trust-item">🚚 {{ section.settings.trust_text_2 | default: 'Ships in 24h' }}</span>
+        <span class="varenal-hero__trust-sep" aria-hidden="true">|</span>
+        <span class="varenal-hero__trust-item">↩ {{ section.settings.trust_text_3 | default: 'Free Returns' }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} Sticky Buy Now CTA — appears on scroll {%- endcomment -%}
+<div class="buy-now-sticky" id="buy-now-sticky">
+  <a href="{{ section.settings.cta_primary_url | default: '#' }}" class="btn-varenal-primary">
+    {{ section.settings.cta_primary_text | default: 'Buy Now — Get Instant Relief' }}
+  </a>
+</div>
+
+{% stylesheet %}
+  /* ============================================
+     VARENAL HERO — Mobile-first
+     ============================================ */
+
+  .varenal-hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    background: var(--color-background, #F8F9FA);
+    overflow: hidden;
+  }
+
+  /* Subtle teal dot-grid pattern */
+  .varenal-hero__bg-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(0, 180, 200, 0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .varenal-hero__container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 100px 20px 60px;
+  }
+
+  /* ---------- Image column ---------- */
+  .varenal-hero__image-col {
+    order: -1; /* Image first on mobile */
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+  }
+
+  .varenal-hero__image-col.animate {
+    animation: fadeIn 0.7s ease-out forwards, heroScale 0.7s ease-out forwards;
+    animation-delay: 0.3s;
+  }
+
+  @keyframes heroScale {
+    from { transform: scale(0.97); }
+    to   { transform: scale(1); }
+  }
+
+  .varenal-hero__image-wrap {
+    position: relative;
+    width: 60vw;
+    max-width: 460px;
+    aspect-ratio: 1 / 1;
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .varenal-hero__image-glow {
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.2) 0%, transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .varenal-hero__image,
+  .varenal-hero__image-placeholder {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 24px;
+  }
+
+  .varenal-hero__image-placeholder svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Floating spec chip */
+  .varenal-hero__spec-chip {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    z-index: 2;
+    background: rgba(26, 26, 46, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #fff;
+    font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 999px;
+    white-space: nowrap;
+    opacity: 0;
+  }
+
+  .varenal-hero__spec-chip.animate {
+    animation: fadeIn 0.5s ease-out 0.6s forwards;
+  }
+
+  /* Floating cert badge */
+  .varenal-hero__cert-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 2;
+    background: var(--color-primary, #00B4C8);
+    color: #fff;
+    font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 999px;
+    opacity: 0;
+  }
+
+  .varenal-hero__cert-badge.animate {
+    animation: fadeIn 0.5s ease-out 0.6s forwards;
+  }
+
+  /* ---------- Text column ---------- */
+  .varenal-hero__text-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Urgency badge */
+  .varenal-hero__urgency-badge {
+    animation: pulseGlow 2.5s infinite;
+  }
+
+  [data-hero-animate="badge"] {
+    opacity: 0;
+  }
+  [data-hero-animate="badge"].animate {
+    animation: fadeInUp 0.5s ease-out 0s forwards;
+  }
+
+  /* Headline */
+  .varenal-hero__headline {
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 1.1;
+    color: var(--color-text, #2D2D2D);
+    opacity: 0;
+  }
+
+  .varenal-hero__headline.animate {
+    animation: fadeInUp 0.5s ease-out 0.15s forwards;
+  }
+
+  /* Subheadline */
+  .varenal-hero__subheadline {
+    font-family: var(--font-body, 'Inter', sans-serif);
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--color-text-muted, #6B7280);
+    max-width: 480px;
+    opacity: 0;
+  }
+
+  .varenal-hero__subheadline.animate {
+    animation: fadeInUp 0.5s ease-out 0.25s forwards;
+  }
+
+  /* Social proof micro-bar */
+  .varenal-hero__social-proof {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--color-text, #2D2D2D);
+    opacity: 0;
+  }
+
+  .varenal-hero__social-proof.animate {
+    animation: fadeInUp 0.5s ease-out 0.35s forwards;
+  }
+
+  .varenal-hero__stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .varenal-hero__separator {
+    width: 1px;
+    height: 16px;
+    background: var(--color-text-muted, #6B7280);
+    opacity: 0.4;
+  }
+
+  .varenal-hero__guarantee {
+    color: var(--color-success, #10B981);
+    font-weight: 600;
+  }
+
+  /* CTA block */
+  .varenal-hero__cta-block {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 320px;
+    opacity: 0;
+  }
+
+  .varenal-hero__cta-block.animate {
+    animation: fadeInUp 0.5s ease-out 0.45s forwards;
+  }
+
+  /* Trust icons row */
+  .varenal-hero__trust-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-muted, #6B7280);
+    opacity: 0;
+  }
+
+  .varenal-hero__trust-row.animate {
+    animation: fadeInUp 0.5s ease-out 0.55s forwards;
+  }
+
+  .varenal-hero__trust-sep {
+    opacity: 0.3;
+  }
+
+  /* ============================================
+     DESKTOP (min-width: 769px)
+     ============================================ */
+
+  @media (min-width: 769px) {
+    .varenal-hero__container {
+      flex-direction: row;
+      align-items: center;
+      gap: 60px;
+      padding: 80px 40px;
+    }
+
+    .varenal-hero__text-col {
+      flex: 0 0 55%;
+      order: -1; /* Text first on desktop */
+    }
+
+    .varenal-hero__image-col {
+      flex: 0 0 45%;
+      order: 0;
+    }
+
+    .varenal-hero__image-wrap {
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .varenal-hero__headline {
+      font-size: 56px;
+    }
+
+    .varenal-hero__subheadline {
+      font-size: 20px;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (function() {
+    'use strict';
+
+    /* --- Hero entrance animations --- */
+    var heroSection = document.querySelector('.varenal-hero');
+    if (!heroSection) return;
+
+    /* Animate all hero elements */
+    function animateHero() {
+      var elements = heroSection.querySelectorAll('[data-hero-animate]');
+      elements.forEach(function(el) { el.classList.add('animate'); });
+      heroSection.querySelector('.varenal-hero__headline').classList.add('animate');
+      heroSection.querySelector('.varenal-hero__subheadline').classList.add('animate');
+
+      var socialProof = heroSection.querySelector('.varenal-hero__social-proof');
+      if (socialProof) socialProof.classList.add('animate');
+
+      var imageCol = heroSection.querySelector('.varenal-hero__image-col');
+      if (imageCol) imageCol.classList.add('animate');
+    }
+
+    /* Run immediately — hero is always above fold */
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', animateHero);
+    } else {
+      animateHero();
+    }
+
+    /* --- Sticky Buy Now CTA via IntersectionObserver on sentinel --- */
+    var sentinel = document.getElementById('scroll-sentinel');
+    var stickyBtn = document.getElementById('buy-now-sticky');
+    if (!sentinel || !stickyBtn) return;
+
+    var mobileBreakpoint = 768;
+    var isMobile = window.innerWidth <= mobileBreakpoint;
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        /* sentinel is at 200px from top. When it exits viewport top = user scrolled past 200px */
+        if (!entry.isIntersecting) {
+          stickyBtn.classList.add('is-visible');
+        } else {
+          stickyBtn.classList.remove('is-visible');
+        }
+      });
+    }, { threshold: 0 });
+
+    /* For mobile: observe a deeper sentinel (~300px) */
+    if (isMobile) {
+      sentinel.style.top = '300px';
+    }
+
+    observer.observe(sentinel);
+
+    /* Handle resize */
+    window.addEventListener('resize', function() {
+      var nowMobile = window.innerWidth <= mobileBreakpoint;
+      if (nowMobile !== isMobile) {
+        isMobile = nowMobile;
+        sentinel.style.top = isMobile ? '300px' : '200px';
+      }
+    });
+
+    /* Smooth scroll for "See How It Works" */
+    var ghostBtn = heroSection.querySelector('.varenal-hero__cta-ghost');
+    if (ghostBtn) {
+      ghostBtn.addEventListener('click', function(e) {
+        var target = document.querySelector(ghostBtn.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "VARENAL Hero",
+  "tag": "section",
+  "class": "varenal-hero-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero product image"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Urgency badge text",
+      "default": "ENVÍO GRATIS — Stock limitado"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Tus pies trabajan 8 horas. Se merecen esto."
+    },
+    {
+      "type": "textarea",
+      "id": "subheadline",
+      "label": "Subheadline",
+      "default": "Termoterapia clínica + masaje por vibración para dolor de tobillo, mala circulación y recuperación deportiva. Inalámbrico. Alivio instantáneo."
+    },
+    {
+      "type": "text",
+      "id": "social_proof_text",
+      "label": "Social proof text",
+      "default": "4.9/5 — 2,300+ clientes"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_text",
+      "label": "Guarantee text",
+      "default": "Garantía de 60 días"
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_text",
+      "label": "Primary CTA text",
+      "default": "Comprar ahora — Alivio instantáneo"
+    },
+    {
+      "type": "url",
+      "id": "cta_primary_url",
+      "label": "Primary CTA link"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_text",
+      "label": "Secondary CTA text",
+      "default": "Descubre cómo funciona ↓"
+    },
+    {
+      "type": "text",
+      "id": "trust_text_1",
+      "label": "Trust text 1",
+      "default": "Pago seguro"
+    },
+    {
+      "type": "text",
+      "id": "trust_text_2",
+      "label": "Trust text 2",
+      "default": "Envío en 24h"
+    },
+    {
+      "type": "text",
+      "id": "trust_text_3",
+      "label": "Trust text 3",
+      "default": "Devolución gratis"
+    },
+    {
+      "type": "text",
+      "id": "spec_chip_text",
+      "label": "Spec chip text",
+      "default": "3 niveles de calor • 3 modos de vibración • 2000mAh"
+    },
+    {
+      "type": "text",
+      "id": "cert_badge_text",
+      "label": "Certification badge text",
+      "default": "CE & RoHS ✓"
+    }
+  ],
+  "presets": [
+    {
+      "name": "VARENAL Hero"
+    }
+  ]
+}
+{% endschema %}

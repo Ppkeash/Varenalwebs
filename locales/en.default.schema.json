@@ -31,7 +31,12 @@
     "sidebar": "Sidebar",
     "text": "Text",
     "theme": "Theme",
-    "typography": "Typography"
+    "typography": "Typography",
+    "varenal_hero": "VARENAL Hero",
+    "varenal_pain_points": "VARENAL Pain points",
+    "varenal_features": "VARENAL Features",
+    "varenal_reviews": "VARENAL Reviews",
+    "varenal_final_cta": "VARENAL Final CTA"
   },
   "labels": {
     "alignment": "Alignment",

@@ -1,52 +1,115 @@
 {
   "404": {
     "title": "404",
-    "not_found": "Page not found.",
-    "back_to_shopping": "Back to shopping"
+    "not_found": "Página no encontrada.",
+    "back_to_shopping": "Volver a la tienda"
   },
   "blog": {
-    "article_comments": "Comments",
-    "article_metadata_html": "{{ date }} by {{ author }}",
-    "comment_form_body": "Comment",
-    "comment_form_email": "Email",
-    "comment_form_name": "Name",
-    "comment_form_submit": "Post",
-    "comment_form_title": "Add a comment"
+    "article_comments": "Comentarios",
+    "article_metadata_html": "{{ date }} por {{ author }}",
+    "comment_form_body": "Comentario",
+    "comment_form_email": "Correo electrónico",
+    "comment_form_name": "Nombre",
+    "comment_form_submit": "Publicar",
+    "comment_form_title": "Deja un comentario"
   },
   "cart": {
-    "checkout": "Checkout",
-    "title": "Cart",
-    "update": "Update",
-    "remove": "Remove"
+    "checkout": "Pagar",
+    "title": "Carrito",
+    "update": "Actualizar",
+    "remove": "Eliminar"
   },
   "customers": {
     "login": {
-      "email": "Email",
-      "password": "Password",
-      "submit": "Sign in",
-      "title": "Login"
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "submit": "Iniciar sesión",
+      "title": "Iniciar sesión"
     }
   },
   "collections": {
-    "title": "Collections"
+    "title": "Colecciones"
   },
   "gift_card": {
-    "add_to_apple_wallet": "Add to Apple Wallet",
-    "card": "Gift card",
-    "expired": "This gift card has expired",
-    "expires_on": "Expires on {{ expires_on }}",
-    "use_at_checkout": "Use this gift card at checkout"
+    "add_to_apple_wallet": "Agregar a Apple Wallet",
+    "card": "Tarjeta de regalo",
+    "expired": "Esta tarjeta de regalo ha expirado",
+    "expires_on": "Expira el {{ expires_on }}",
+    "use_at_checkout": "Usa esta tarjeta de regalo al pagar"
   },
   "password": {
-    "title": "This shop is private",
-    "password": "Password",
-    "enter": "Enter"
+    "title": "Esta tienda es privada",
+    "password": "Contraseña",
+    "enter": "Entrar"
   },
   "search": {
-    "title": "Search",
-    "placeholder": "Search articles, pages, or products",
-    "submit": "Search",
-    "no_results_html": "No results found for {{ terms }}",
-    "results_for_html": "{{ count }} results found for {{ terms }}"
+    "title": "Buscar",
+    "placeholder": "Buscar artículos, páginas o productos",
+    "submit": "Buscar",
+    "no_results_html": "No se encontraron resultados para {{ terms }}",
+    "results_for_html": "{{ count }} resultados para {{ terms }}"
+  },
+  "sections": {
+    "hero": {
+      "badge": "ENVÍO GRATIS — Stock limitado",
+      "headline": "Tus pies trabajan 8 horas. Se merecen esto.",
+      "subheadline": "Termoterapia clínica + masaje por vibración para dolor de tobillo, mala circulación y recuperación deportiva. Inalámbrico. Alivio instantáneo.",
+      "social_proof": "4.9/5 — 2,300+ clientes",
+      "guarantee": "Garantía de 60 días",
+      "cta_primary": "Comprar ahora — Alivio instantáneo",
+      "cta_secondary": "Descubre cómo funciona ↓",
+      "trust_secure": "Pago seguro",
+      "trust_shipping": "Envío en 24h",
+      "trust_returns": "Devolución gratis",
+      "spec_chip": "3 niveles de calor • 3 modos de vibración • 2000mAh",
+      "cert_badge": "CE & RoHS ✓"
+    },
+    "pain_points": {
+      "eyebrow": "DISEÑADO PARA TU DOLOR",
+      "heading": "Deja de aguantar. Empieza a recuperarte.",
+      "subheading": "Ya sea que estés todo el día de pie, recuperándote de una lesión o simplemente agotado — VARENAL fue diseñado para ti.",
+      "card_1_title": "Tus pies duelen después de cada turno",
+      "card_1_body": "Después de horas de pie, el dolor es imparable. Calor dirigido de 48°C a 58°C proporciona alivio térmico instantáneo exactamente donde duele, reduciendo la inflamación desde el primer contacto.",
+      "card_2_title": "El fisio es caro e incómodo",
+      "card_2_body": "Olvídate de las citas y los desplazamientos. VARENAL lleva la terapia profesional de tobillo a tu sofá, tu cama, tu vida — disponible cuando lo necesites, sin reservas.",
+      "card_3_title": "Mala circulación y piernas pesadas",
+      "card_3_body": "Tobillos hinchados, pies fríos, esa fatiga de piernas pesadas — tres modos de vibración estimulan activamente el flujo sanguíneo, restaurando energía y reduciendo esa sensación pesada.",
+      "card_4_title": "La recuperación deportiva lenta te frena",
+      "card_4_body": "Los estilos de vida activos exigen una recuperación más rápida. El VARENAL CL-2888 combina calor + vibración para acelerar la reparación muscular y la movilidad articular.",
+      "bottom_text": "La elección de enfermeras, atletas, profesores y todos los que pasan el día de pie."
+    },
+    "features": {
+      "badge_1": "CONTROL INTELIGENTE DE CALOR",
+      "heading_1": "Tres modos de temperatura. Cero complicaciones.",
+      "body_1": "Ya necesites calor suave para el confort diario (48°C), recuperación terapéutica (53°C) o alivio profundo (58°C) — un toque en la pantalla LED te da la temperatura perfecta, al instante.",
+      "badge_2": "LIBERTAD INALÁMBRICA",
+      "heading_2": "Batería de 2000mAh. Sin cables. Sin límites.",
+      "body_2": "Totalmente inalámbrico con carga rápida de 2 horas para 4–5 sesiones completas. La pantalla LED muestra temperatura y nivel de vibración en tiempo real. Apagado automático a los 15 minutos.",
+      "badge_3": "AJUSTE UNIVERSAL",
+      "heading_3": "Se adapta a ambos tobillos. Firme todo el día.",
+      "body_3": "La hebilla de velcro resistente y el neopreno transpirable se adaptan a cualquier tobillo. El forro de felpa suave con la piel asegura comodidad prolongada en pie izquierdo o derecho."
+    },
+    "reviews": {
+      "eyebrow": "RESULTADOS REALES",
+      "heading": "Únete a las 2,300+ personas que finalmente encontraron alivio",
+      "average_rating": "Puntuación media",
+      "verified_reviews": "Reseñas verificadas",
+      "would_recommend": "Lo recomendarían",
+      "verified_purchase": "Compra verificada",
+      "read_more": "Leer más",
+      "read_less": "Leer menos",
+      "cta_text": "¿VARENAL también cambió tu vida?",
+      "cta_button": "Comparte tu experiencia →"
+    },
+    "final_cta": {
+      "badge": "OFERTA LIMITADA",
+      "headline": "Tu recuperación empieza esta noche.",
+      "subtitle": "Únete a las 2,300+ personas que decidieron dejar de aguantar y empezar a recuperarse. Envío gratis. Garantía de devolución de 60 días.",
+      "cta_text": "Quiero mi VARENAL ahora",
+      "urgency": "Normalmente se envía en 24 horas",
+      "trust_shipping": "Envío gratis",
+      "trust_returns": "60 días de devolución",
+      "trust_secure": "Pago seguro"
+    }
   }
 }
