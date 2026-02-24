@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "varenal_hero": {
@@ -9,12 +18,13 @@
         "social_proof_text": "4.9/5 — 2,300+ clientes",
         "guarantee_text": "Garantía de 60 días",
         "cta_primary_text": "Comprar ahora — Alivio instantáneo",
+        "cta_primary_url": "",
         "cta_secondary_text": "Descubre cómo funciona ↓",
         "trust_text_1": "Pago seguro",
         "trust_text_2": "Envío en 24h",
         "trust_text_3": "Devolución gratis",
         "spec_chip_text": "3 niveles de calor • 3 modos de vibración • 2000mAh",
-        "cert_badge_text": "CE & RoHS ✓"
+        "cert_badge_text": "VARENAL"
       }
     },
     "varenal_pain_points": {
@@ -53,7 +63,12 @@
           }
         }
       },
-      "block_order": ["card_1", "card_2", "card_3", "card_4"],
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
       "settings": {
         "eyebrow": "DISEÑADO PARA TU DOLOR",
         "heading": "Deja de aguantar. Empieza a recuperarte.",
@@ -79,7 +94,8 @@
       "type": "varenal-reviews",
       "settings": {
         "eyebrow": "RESULTADOS REALES",
-        "heading": "Únete a las 2,300+ personas que finalmente encontraron alivio"
+        "heading": "Únete a las 2,300+ personas que finalmente encontraron alivio",
+        "review_url": ""
       }
     },
     "varenal_final_cta": {
@@ -89,6 +105,7 @@
         "headline": "Tu recuperación empieza esta noche.",
         "subtitle": "Únete a las 2,300+ personas que decidieron dejar de aguantar y empezar a recuperarse. Envío gratis. Garantía de devolución de 60 días.",
         "cta_text": "Quiero mi VARENAL ahora",
+        "cta_url": "",
         "trust_1": "Envío gratis",
         "trust_2": "60 días de devolución",
         "trust_3": "Pago seguro"
