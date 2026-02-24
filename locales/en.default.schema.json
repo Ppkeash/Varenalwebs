@@ -52,7 +52,8 @@
     "page_width": "Page width",
     "show_payment_icons": "Show payment icons",
     "text_style": "Text style",
-    "text": "Text"
+    "text": "Text",
+    "products_per_page": "Products per page"
   },
   "options": {
     "alignment": {

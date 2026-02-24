@@ -1,19 +1,63 @@
 {% comment %}
-  This section is used in the 404 template to render page shown when customers
-  enter an invalid store URL.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/404
+  VARENAL 404 — Branded not-found page.
 {% endcomment %}
 
-<h1>{{ '404.title' | t }}</h1>
+<section class="varenal-404 varenal-section">
+  <div class="varenal-404__content">
+    <div class="varenal-404__icon" aria-hidden="true">
+      <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+    </div>
+    <h1 class="varenal-404__title">404</h1>
+    <p class="varenal-404__subtitle">{{ 'general.404.title' | t }}</p>
+    <p class="varenal-404__body">{{ 'general.404.body' | t }}</p>
+    <a href="{{ routes.root_url }}" class="btn-varenal-primary">
+      {{ 'general.404.button' | t }}
+    </a>
+  </div>
+</section>
 
-<p>
-  {{ '404.not_found' | t }}
-</p>
+{% stylesheet %}
+  .varenal-404 {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-<a href="{{ routes.all_products_collection_url }}">
-  {{ '404.back_to_shopping' | t }}
-</a>
+  .varenal-404__content {
+    text-align: center;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .varenal-404__icon { opacity: 0.35; margin-bottom: 0.5rem; }
+
+  .varenal-404__title {
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-weight: 800;
+    font-size: 5rem;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--color-primary, #00B4C8), var(--color-secondary, #1A1A2E));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .varenal-404__subtitle {
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--color-text, #2D2D2D);
+  }
+
+  .varenal-404__body {
+    color: var(--color-text-muted, #6B7280);
+    line-height: 1.6;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

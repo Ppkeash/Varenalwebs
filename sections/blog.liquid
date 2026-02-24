@@ -1,31 +1,229 @@
 {% comment %}
-  This section is used in the blog template to render the blog page listing all
-  articles within a blog.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/blog
+  VARENAL Blog — Article listing with brand-consistent card design.
 {% endcomment %}
 
-<h1>{{ blog.title }}</h1>
+{%- paginate blog.articles by 9 -%}
+<section class="varenal-blog varenal-section">
+  <div class="varenal-blog__header">
+    <h1 class="varenal-blog__title">{{ blog.title }}</h1>
+  </div>
 
-{% paginate blog.articles by 5 %}
-  {% for article in blog.articles %}
-    <div>
-      {% if article.image %}
-        {{ article.image | image_url: width: 1000 | image_tag }}
-      {% endif %}
-      <h2>
-        {{ article.title | link_to: article.url }}
-      </h2>
-      {% assign date = article.published_at | time_tag: format: 'date' %}
-      <p>{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
-      <p>{{ article.excerpt }}</p>
+  {% if blog.articles.size == 0 %}
+    <div class="varenal-blog__empty">
+      <p>{{ 'blog.empty' | t }}</p>
     </div>
-  {% endfor %}
+  {% else %}
+    <div class="varenal-blog__grid">
+      {% for article in blog.articles %}
+        <a href="{{ article.url }}" class="varenal-article-card">
+          {% if article.image %}
+            <div class="varenal-article-card__image-wrap">
+              {{ article.image | image_url: width: 600 | image_tag: class: 'varenal-article-card__image', loading: 'lazy' }}
+            </div>
+          {% endif %}
+          <div class="varenal-article-card__body">
+            <div class="varenal-article-card__meta">
+              <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+                {{ article.published_at | date: '%d %b %Y' }}
+              </time>
+              {% if article.tags.size > 0 %}
+                <span class="varenal-article-card__tag">{{ article.tags.first }}</span>
+              {% endif %}
+            </div>
+            <h2 class="varenal-article-card__title">{{ article.title }}</h2>
+            <p class="varenal-article-card__excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 22 }}</p>
+            <span class="varenal-article-card__link">{{ 'blog.read_more' | t }} →</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
 
-  {%- if paginate.pages > 1 -%}
-    {{- paginate | default_pagination -}}
-  {%- endif -%}
-{% endpaginate %}
+    {% if paginate.pages > 1 %}
+      <nav class="varenal-pagination" aria-label="Pagination">
+        {% if paginate.previous %}
+          <a href="{{ paginate.previous.url }}" class="varenal-pagination__btn">←</a>
+        {% endif %}
+        {% for part in paginate.parts %}
+          {% if part.is_link %}
+            <a href="{{ part.url }}" class="varenal-pagination__page">{{ part.title }}</a>
+          {% elsif part.title == paginate.current_page %}
+            <span class="varenal-pagination__page varenal-pagination__page--active" aria-current="page">{{ part.title }}</span>
+          {% else %}
+            <span class="varenal-pagination__page">{{ part.title }}</span>
+          {% endif %}
+        {% endfor %}
+        {% if paginate.next %}
+          <a href="{{ paginate.next.url }}" class="varenal-pagination__btn">→</a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  {% endif %}
+</section>
+{%- endpaginate -%}
+
+{% stylesheet %}
+  .varenal-blog__header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .varenal-blog__title {
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-weight: 800;
+    font-size: 2rem;
+  }
+
+  .varenal-blog__empty {
+    text-align: center;
+    padding: 4rem 0;
+    color: var(--color-text-muted, #6B7280);
+  }
+
+  .varenal-blog__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .varenal-article-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white, #fff);
+    border-radius: var(--radius-lg, 16px);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.06));
+    border: 1px solid rgba(0,0,0,0.04);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .varenal-article-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md, 0 4px 16px rgba(0,0,0,0.1));
+  }
+
+  .varenal-article-card__image-wrap {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--color-background, #F8F9FA);
+  }
+
+  .varenal-article-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .varenal-article-card:hover .varenal-article-card__image {
+    transform: scale(1.05);
+  }
+
+  .varenal-article-card__body {
+    padding: 1.25rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+  }
+
+  .varenal-article-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--color-text-muted, #6B7280);
+  }
+
+  .varenal-article-card__tag {
+    background: rgba(0, 180, 200, 0.1);
+    color: var(--color-primary, #00B4C8);
+    padding: 0.15rem 0.6rem;
+    border-radius: var(--radius-full, 999px);
+    font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .varenal-article-card__title {
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-weight: 700;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    color: var(--color-text, #2D2D2D);
+  }
+
+  .varenal-article-card__excerpt {
+    font-size: 0.9rem;
+    color: var(--color-text-muted, #6B7280);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .varenal-article-card__link {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--color-primary, #00B4C8);
+    margin-top: 0.5rem;
+    transition: color 0.2s;
+  }
+
+  .varenal-article-card:hover .varenal-article-card__link {
+    color: var(--color-secondary, #1A1A2E);
+  }
+
+  /* Pagination - shared classes with collection */
+  .varenal-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 3rem;
+  }
+
+  .varenal-pagination__page,
+  .varenal-pagination__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md, 8px);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--color-text, #2D2D2D);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .varenal-pagination__page:hover,
+  .varenal-pagination__btn:hover {
+    background: var(--color-background, #F8F9FA);
+  }
+
+  .varenal-pagination__page--active {
+    background: var(--color-primary, #00B4C8);
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .varenal-blog__grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .varenal-blog__title { font-size: 1.5rem; }
+    .varenal-article-card { flex-direction: row; }
+    .varenal-article-card__image-wrap {
+      width: 120px;
+      min-height: 120px;
+      aspect-ratio: auto;
+      flex-shrink: 0;
+    }
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

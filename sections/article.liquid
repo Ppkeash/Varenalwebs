@@ -1,64 +1,370 @@
 {% comment %}
-  This section is used in the article template to render the article page, which
-  displays the full content of the blog post and can optionally include a
-  comments section for customers (not shown in this example).
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/article
+  VARENAL Article — Single blog post with brand-consistent typography.
 {% endcomment %}
 
-{% if article.image %}
-  {{ article.image | image_url: width: 1000 | image_tag }}
-{% endif %}
+<article class="varenal-article varenal-section">
+  <header class="varenal-article__header">
+    <div class="varenal-article__meta">
+      <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+        {{ article.published_at | date: '%d %b %Y' }}
+      </time>
+      {% if article.author %}
+        <span class="varenal-article__meta-sep">·</span>
+        <span>{{ article.author }}</span>
+      {% endif %}
+    </div>
+    <h1 class="varenal-article__title">{{ article.title }}</h1>
+    {% if article.tags.size > 0 %}
+      <div class="varenal-article__tags">
+        {% for tag in article.tags %}
+          <span class="varenal-article__tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </header>
 
-<h1>{{ article.title }}</h1>
+  {% if article.image %}
+    <div class="varenal-article__hero-image">
+      {{ article.image | image_url: width: 1200 | image_tag: class: 'varenal-article__hero-img', loading: 'eager' }}
+    </div>
+  {% endif %}
 
-{% assign date = article.published_at | time_tag: format: 'date' %}
-<p>{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
-
-{{ article.content }}
-
-{% if blog.comments_enabled? %}
-  <h2>{{ 'blog.article_comments' | t }}</h2>
-
-  <div id="comments">
-    {% paginate article.comments by 10 %}
-      {% for comment in article.comments %}
-        <div>
-          <p>{{ comment.author }}</p>
-          <p>
-            {{- comment.created_at | time_tag: format: 'date' -}}
-          </p>
-          <p>{{ comment.content }}</p>
-        </div>
-      {% endfor %}
-
-      {{ paginate | default_pagination: anchor: 'comments' }}
-    {% endpaginate %}
+  <div class="varenal-article__content rte">
+    {{ article.content }}
   </div>
 
-  {% form 'new_comment', article %}
-    <h2>{{ 'blog.comment_form_title' | t }}</h2>
+  {% if blog.comments_enabled? %}
+    <section class="varenal-article__comments" id="comments">
+      <h2 class="varenal-article__comments-title">
+        {{ 'blog.comments' | t }} ({{ article.comments_count }})
+      </h2>
 
-    {{ form.errors | default_errors }}
+      {% if article.comments.size > 0 %}
+        {%- paginate article.comments by 10 -%}
+          <div class="varenal-article__comments-list">
+            {% for comment in article.comments %}
+              <div class="varenal-article__comment">
+                <div class="varenal-article__comment-header">
+                  <strong>{{ comment.author }}</strong>
+                  <time datetime="{{ comment.created_at | date: '%Y-%m-%d' }}">
+                    {{ comment.created_at | date: '%d %b %Y' }}
+                  </time>
+                </div>
+                <div class="varenal-article__comment-body">{{ comment.content }}</div>
+              </div>
+            {% endfor %}
+          </div>
 
-    <div>
-      <label for="author">{{ 'blog.comment_form_name' | t }}</label>
-      <input type="text" name="comment[author]" id="author" value="{{ form.author }}" required>
-    </div>
+          {% if paginate.pages > 1 %}
+            <nav class="varenal-pagination" aria-label="Comments">
+              {% if paginate.previous %}
+                <a href="{{ paginate.previous.url }}#comments" class="varenal-pagination__btn">←</a>
+              {% endif %}
+              {% for part in paginate.parts %}
+                {% if part.is_link %}
+                  <a href="{{ part.url }}#comments" class="varenal-pagination__page">{{ part.title }}</a>
+                {% elsif part.title == paginate.current_page %}
+                  <span class="varenal-pagination__page varenal-pagination__page--active">{{ part.title }}</span>
+                {% else %}
+                  <span class="varenal-pagination__page">{{ part.title }}</span>
+                {% endif %}
+              {% endfor %}
+              {% if paginate.next %}
+                <a href="{{ paginate.next.url }}#comments" class="varenal-pagination__btn">→</a>
+              {% endif %}
+            </nav>
+          {% endif %}
+        {%- endpaginate -%}
+      {% endif %}
 
-    <div>
-      <label for="email">{{ 'blog.comment_form_email' | t }}</label>
-      <input type="email" name="comment[email]" id="email" value="{{ form.email }}" required>
-    </div>
+      {% form 'new_comment', article %}
+        <div class="varenal-article__comment-form">
+          <h3 class="varenal-article__form-title">{{ 'blog.leave_comment' | t }}</h3>
 
-    <div>
-      <label for="body">{{ 'blog.comment_form_body' | t }}</label>
-      <textarea name="comment[body]" id="body" required>{{ form.body }}</textarea>
-    </div>
+          {% if form.errors %}
+            <div class="varenal-article__form-errors">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
 
-    <input type="submit" value="{{ 'blog.comment_form_submit' | t }}">
-  {% endform %}
-{% endif %}
+          {% if form.posted_successfully? %}
+            <div class="varenal-article__form-success">
+              {{ 'blog.comment_success' | t }}
+            </div>
+          {% endif %}
+
+          <div class="varenal-article__form-row">
+            <div class="varenal-article__form-field">
+              <label for="comment-author">{{ 'blog.name' | t }}</label>
+              <input type="text" name="comment[author]" id="comment-author" class="varenal-input" required value="{{ form.author }}">
+            </div>
+            <div class="varenal-article__form-field">
+              <label for="comment-email">{{ 'blog.email' | t }}</label>
+              <input type="email" name="comment[email]" id="comment-email" class="varenal-input" required value="{{ form.email }}">
+            </div>
+          </div>
+          <div class="varenal-article__form-field">
+            <label for="comment-body">{{ 'blog.message' | t }}</label>
+            <textarea name="comment[body]" id="comment-body" class="varenal-input varenal-textarea" rows="5" required>{{ form.body }}</textarea>
+          </div>
+          <button type="submit" class="btn-varenal-primary">{{ 'blog.post_comment' | t }}</button>
+        </div>
+      {% endform %}
+    </section>
+  {% endif %}
+
+  <div class="varenal-article__back">
+    <a href="{{ blog.url }}" class="btn-varenal-ghost">← {{ 'blog.back_to_blog' | t }}</a>
+  </div>
+</article>
+
+{% stylesheet %}
+  .varenal-article__header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 2rem;
+  }
+
+  .varenal-article__meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-text-muted, #6B7280);
+    margin-bottom: 1rem;
+  }
+
+  .varenal-article__title {
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-weight: 800;
+    font-size: 2.4rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .varenal-article__tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .varenal-article__tag {
+    background: rgba(0, 180, 200, 0.1);
+    color: var(--color-primary, #00B4C8);
+    padding: 0.2rem 0.75rem;
+    border-radius: var(--radius-full, 999px);
+    font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .varenal-article__hero-image {
+    border-radius: var(--radius-lg, 16px);
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .varenal-article__hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .varenal-article__content {
+    max-width: 720px;
+    margin: 0 auto 3rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--color-text, #2D2D2D);
+  }
+
+  .varenal-article__content h2,
+  .varenal-article__content h3 {
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .varenal-article__content img {
+    border-radius: var(--radius-md, 8px);
+    max-width: 100%;
+    height: auto;
+  }
+
+  .varenal-article__content blockquote {
+    border-left: 4px solid var(--color-primary, #00B4C8);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: rgba(0, 180, 200, 0.05);
+    border-radius: 0 var(--radius-md, 8px) var(--radius-md, 8px) 0;
+    font-style: italic;
+    color: var(--color-text-muted, #6B7280);
+  }
+
+  /* Comments */
+  .varenal-article__comments {
+    max-width: 720px;
+    margin: 0 auto 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .varenal-article__comments-title {
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .varenal-article__comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .varenal-article__comment {
+    background: var(--color-white, #fff);
+    border-radius: var(--radius-md, 8px);
+    padding: 1.25rem;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .varenal-article__comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .varenal-article__comment-header time {
+    color: var(--color-text-muted, #6B7280);
+    font-size: 0.8rem;
+  }
+
+  .varenal-article__comment-body {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text, #2D2D2D);
+  }
+
+  /* Comment form */
+  .varenal-article__comment-form {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .varenal-article__form-title {
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .varenal-article__form-errors {
+    background: #fef2f2;
+    color: #b91c1c;
+    padding: 1rem;
+    border-radius: var(--radius-md, 8px);
+    font-size: 0.9rem;
+  }
+
+  .varenal-article__form-success {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--color-success, #10B981);
+    padding: 1rem;
+    border-radius: var(--radius-md, 8px);
+    font-size: 0.9rem;
+  }
+
+  .varenal-article__form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .varenal-article__form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .varenal-article__form-field label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--color-text, #2D2D2D);
+  }
+
+  .varenal-input {
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: var(--radius-md, 8px);
+    font-size: 0.95rem;
+    background: var(--color-background, #F8F9FA);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+  }
+
+  .varenal-input:focus {
+    outline: none;
+    border-color: var(--color-primary, #00B4C8);
+    box-shadow: 0 0 0 3px rgba(0, 180, 200, 0.15);
+  }
+
+  .varenal-textarea { resize: vertical; min-height: 120px; }
+
+  .varenal-article__back {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .varenal-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .varenal-pagination__page,
+  .varenal-pagination__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md, 8px);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--color-text, #2D2D2D);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .varenal-pagination__page:hover,
+  .varenal-pagination__btn:hover { background: var(--color-background, #F8F9FA); }
+
+  .varenal-pagination__page--active {
+    background: var(--color-primary, #00B4C8);
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .varenal-article__title { font-size: 1.6rem; }
+    .varenal-article__form-row { grid-template-columns: 1fr; }
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

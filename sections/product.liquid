@@ -2,7 +2,7 @@
   VARENAL Product Page - Optimized for conversion
 {% endcomment %}
 
-<div class="product-page section-padding">
+<div class="product-page varenal-section">
   <div class="product-page__grid">
     <div class="product-page__gallery">
       {% for image in product.images %}
@@ -89,7 +89,7 @@
           <input type="number" id="qty" name="quantity" min="1" value="1" class="product-page__qty-input">
         </div>
 
-        <button type="submit" class="btn btn-primary btn-large product-page__add-btn">
+        <button type="submit" class="btn-varenal-primary product-page__add-btn">
           Agregar al Carrito — {{ current_variant.price | money }}
         </button>
 
@@ -128,29 +128,34 @@
   }
 
   .product-page__image-wrap {
-    border-radius: 12px;
+    border-radius: var(--radius-lg, 16px);
     overflow: hidden;
-    background: #f8f8f8;
+    background: var(--color-background, #F8F9FA);
   }
 
   .product-page__image {
     width: 100%;
     height: auto;
-    border-radius: 12px;
+    border-radius: var(--radius-lg, 16px);
   }
 
   .product-page__badge {
     display: inline-block;
-    background: rgba(45, 181, 163, 0.1);
-    color: var(--color-primary);
+    background: rgba(0, 180, 200, 0.1);
+    color: var(--color-primary, #00B4C8);
     padding: 0.3rem 1rem;
-    border-radius: 50px;
-    font-size: 0.8rem;
+    border-radius: var(--radius-full, 999px);
+    font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+    font-size: 0.75rem;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     margin-bottom: 1rem;
   }
 
   .product-page__title {
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-weight: 800;
     font-size: clamp(1.6rem, 3vw, 2.2rem);
     margin-bottom: 0.8rem;
     line-height: 1.25;
@@ -165,7 +170,7 @@
 
   .product-page__rating-text {
     font-size: 0.85rem;
-    color: #666;
+    color: var(--color-text-muted, #6B7280);
     margin-left: 0.5rem;
   }
 
@@ -178,15 +183,15 @@
 
   .product-page__price-current,
   .product-page__price-sale {
-    font-family: var(--font-heading--family);
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
     font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--color-primary);
+    font-weight: 800;
+    color: var(--color-primary, #00B4C8);
   }
 
   .product-page__price-old {
     font-size: 1.2rem;
-    color: #999;
+    color: var(--color-text-muted, #6B7280);
     text-decoration: line-through;
   }
 
@@ -201,7 +206,7 @@
 
   .product-page__description {
     font-size: 0.95rem;
-    color: #555;
+    color: var(--color-text-muted, #6B7280);
     line-height: 1.7;
     margin-bottom: 1.5rem;
   }
@@ -218,7 +223,7 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 0.9rem;
-    color: #444;
+    color: var(--color-text, #2D2D2D);
   }
 
   .product-page__label {
@@ -235,9 +240,18 @@
   .product-page__select {
     width: 100%;
     padding: 0.7rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: var(--radius-md, 8px);
     font-size: 0.95rem;
+    background: var(--color-background, #F8F9FA);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+  }
+
+  .product-page__select:focus {
+    outline: none;
+    border-color: var(--color-primary, #00B4C8);
+    box-shadow: 0 0 0 3px rgba(0, 180, 200, 0.15);
   }
 
   .product-page__quantity {
@@ -247,10 +261,18 @@
   .product-page__qty-input {
     width: 80px;
     padding: 0.7rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: var(--radius-md, 8px);
     font-size: 0.95rem;
     text-align: center;
+    background: var(--color-background, #F8F9FA);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .product-page__qty-input:focus {
+    outline: none;
+    border-color: var(--color-primary, #00B4C8);
+    box-shadow: 0 0 0 3px rgba(0, 180, 200, 0.15);
   }
 
   .product-page__add-btn {
@@ -264,7 +286,7 @@
     justify-content: space-between;
     margin-top: 1.5rem;
     padding-top: 1.5rem;
-    border-top: 1px solid #eee;
+    border-top: 1px solid rgba(0,0,0,0.06);
   }
 
   .product-page__trust-badge {
@@ -273,7 +295,7 @@
     align-items: center;
     gap: 0.3rem;
     font-size: 0.8rem;
-    color: #666;
+    color: var(--color-text-muted, #6B7280);
     text-align: center;
   }
 

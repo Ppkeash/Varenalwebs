@@ -1,8 +1,10 @@
 {
-  "404": {
-    "title": "404",
-    "not_found": "Página no encontrada.",
-    "back_to_shopping": "Volver a la tienda"
+  "general": {
+    "404": {
+      "title": "Página no encontrada",
+      "body": "Lo sentimos, la página que buscas no existe o fue movida.",
+      "button": "Volver al inicio"
+    }
   },
   "blog": {
     "article_comments": "Comentarios",
@@ -11,13 +13,29 @@
     "comment_form_email": "Correo electrónico",
     "comment_form_name": "Nombre",
     "comment_form_submit": "Publicar",
-    "comment_form_title": "Deja un comentario"
+    "comment_form_title": "Deja un comentario",
+    "empty": "No hay artículos todavía.",
+    "read_more": "Leer más",
+    "comments": "Comentarios",
+    "leave_comment": "Deja un comentario",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "message": "Mensaje",
+    "post_comment": "Publicar comentario",
+    "comment_success": "¡Tu comentario fue publicado con éxito!",
+    "back_to_blog": "Volver al blog"
   },
   "cart": {
     "checkout": "Pagar",
     "title": "Carrito",
     "update": "Actualizar",
     "remove": "Eliminar"
+  },
+  "collection": {
+    "products_count": "productos",
+    "empty": "No hay productos en esta colección.",
+    "continue_shopping": "Seguir comprando",
+    "sale": "Oferta"
   },
   "customers": {
     "login": {
@@ -38,14 +56,19 @@
     "use_at_checkout": "Usa esta tarjeta de regalo al pagar"
   },
   "password": {
-    "title": "Esta tienda es privada",
-    "password": "Contraseña",
-    "enter": "Entrar"
+    "title": "Próximamente",
+    "subtitle": "Estamos preparando algo increíble. Ingresa la contraseña para acceder.",
+    "placeholder": "Contraseña",
+    "button": "Entrar",
+    "owner": "¿Eres el dueño de la tienda?",
+    "owner_link": "Inicia sesión aquí"
   },
   "search": {
     "title": "Buscar",
-    "placeholder": "Buscar artículos, páginas o productos",
-    "submit": "Buscar",
+    "placeholder": "Buscar artículos, páginas o productos...",
+    "button": "Buscar",
+    "results_for": "resultados para",
+    "no_results": "No se encontraron resultados. Intenta con otra búsqueda.",
     "no_results_html": "No se encontraron resultados para {{ terms }}",
     "results_for_html": "{{ count }} resultados para {{ terms }}"
   },

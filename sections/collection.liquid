@@ -1,47 +1,282 @@
 {% comment %}
-  This section is used in the collection template to render collection page
-  listing all products within a collection.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
+  VARENAL Collection — Product grid with brand-consistent card design.
 {% endcomment %}
 
-<h1>{{ collection.title }}</h1>
+{%- paginate collection.products by section.settings.products_per_page -%}
+<section class="varenal-collection varenal-section">
+  <div class="varenal-collection__header">
+    <h1 class="varenal-collection__title">{{ collection.title }}</h1>
+    {% if collection.description != blank %}
+      <p class="varenal-collection__description">{{ collection.description }}</p>
+    {% endif %}
+    <span class="varenal-collection__count">{{ collection.products_count }} {{ 'collection.products_count' | t }}</span>
+  </div>
 
-<div class="collection-products">
-  {% paginate collection.products by 20 %}
-    {% for product in collection.products %}
-      <div class="collection-product">
-        {% if product.featured_image %}
-          {% render 'image',
-            class: 'collection-product__image',
-            image: product.featured_image,
-            url: product.url,
-            width: 400,
-            height: 400,
-            crop: 'center'
-          %}
+  {% if collection.products.size == 0 %}
+    <div class="varenal-collection__empty">
+      <p>{{ 'collection.empty' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="btn-varenal-primary">
+        {{ 'collection.continue_shopping' | t }}
+      </a>
+    </div>
+  {% else %}
+    <div class="varenal-collection__grid">
+      {% for product in collection.products %}
+        <a href="{{ product.url }}" class="varenal-product-card">
+          <div class="varenal-product-card__image-wrap">
+            {% if product.featured_image %}
+              {{ product.featured_image | image_url: width: 600 | image_tag: class: 'varenal-product-card__image', loading: 'lazy' }}
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'varenal-product-card__placeholder' }}
+            {% endif %}
+            {% if product.compare_at_price > product.price %}
+              <span class="varenal-product-card__badge">{{ 'collection.sale' | t }}</span>
+            {% endif %}
+          </div>
+
+          <div class="varenal-product-card__info">
+            <h3 class="varenal-product-card__title">{{ product.title }}</h3>
+            {% if product.vendor != blank %}
+              <p class="varenal-product-card__vendor">{{ product.vendor }}</p>
+            {% endif %}
+            <div class="varenal-product-card__price">
+              {% if product.compare_at_price > product.price %}
+                <span class="varenal-product-card__price-old">{{ product.compare_at_price | money }}</span>
+              {% endif %}
+              <span class="varenal-product-card__price-current">{{ product.price | money }}</span>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
+    {% if paginate.pages > 1 %}
+      <nav class="varenal-pagination" aria-label="Pagination">
+        {% if paginate.previous %}
+          <a href="{{ paginate.previous.url }}" class="varenal-pagination__btn" aria-label="Anterior">←</a>
         {% endif %}
-        <div class="collection-product__content">
-          <p>{{ product.title | escape | link_to: product.url }}</p>
-          <p>{{ product.price | money }}</p>
-        </div>
-      </div>
-    {% endfor %}
 
-    {{ paginate | default_pagination }}
-  {% endpaginate %}
-</div>
+        {% for part in paginate.parts %}
+          {% if part.is_link %}
+            <a href="{{ part.url }}" class="varenal-pagination__page">{{ part.title }}</a>
+          {% elsif part.title == paginate.current_page %}
+            <span class="varenal-pagination__page varenal-pagination__page--active" aria-current="page">{{ part.title }}</span>
+          {% else %}
+            <span class="varenal-pagination__page">{{ part.title }}</span>
+          {% endif %}
+        {% endfor %}
+
+        {% if paginate.next %}
+          <a href="{{ paginate.next.url }}" class="varenal-pagination__btn" aria-label="Siguiente">→</a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  {% endif %}
+</section>
+{%- endpaginate -%}
 
 {% stylesheet %}
-  .collection-products {
+  .varenal-collection__header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .varenal-collection__title {
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-weight: 800;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .varenal-collection__description {
+    color: var(--color-text-muted, #6B7280);
+    max-width: 640px;
+    margin: 0 auto 0.75rem;
+    line-height: 1.6;
+  }
+
+  .varenal-collection__count {
+    display: inline-block;
+    font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-primary, #00B4C8);
+    font-weight: 600;
+  }
+
+  .varenal-collection__empty {
+    text-align: center;
+    padding: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .varenal-collection__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .varenal-product-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    background: var(--color-white, #fff);
+    border-radius: var(--radius-lg, 16px);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.06));
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .varenal-product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md, 0 4px 16px rgba(0,0,0,0.1));
+  }
+
+  .varenal-product-card__image-wrap {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: var(--color-background, #F8F9FA);
+  }
+
+  .varenal-product-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .varenal-product-card:hover .varenal-product-card__image {
+    transform: scale(1.05);
+  }
+
+  .varenal-product-card__placeholder {
+    width: 60%;
+    height: 60%;
+    margin: 20%;
+    opacity: 0.3;
+  }
+
+  .varenal-product-card__badge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background: var(--color-accent, #FF6B35);
+    color: #fff;
+    font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--radius-full, 999px);
+  }
+
+  .varenal-product-card__info {
+    padding: 1rem 1.25rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+  }
+
+  .varenal-product-card__title {
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: var(--color-text, #2D2D2D);
+  }
+
+  .varenal-product-card__vendor {
+    font-size: 0.8rem;
+    color: var(--color-text-muted, #6B7280);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .varenal-product-card__price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
+  }
+
+  .varenal-product-card__price-current {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--color-primary, #00B4C8);
+  }
+
+  .varenal-product-card__price-old {
+    text-decoration: line-through;
+    font-size: 0.85rem;
+    color: var(--color-text-muted, #6B7280);
+  }
+
+  /* Pagination */
+  .varenal-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 3rem;
+  }
+
+  .varenal-pagination__page,
+  .varenal-pagination__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md, 8px);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--color-text, #2D2D2D);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .varenal-pagination__page:hover,
+  .varenal-pagination__btn:hover {
+    background: var(--color-background, #F8F9FA);
+  }
+
+  .varenal-pagination__page--active {
+    background: var(--color-primary, #00B4C8);
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .varenal-collection__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .varenal-collection__title { font-size: 1.5rem; }
   }
 {% endstylesheet %}
 
 {% schema %}
 {
   "name": "t:general.collection",
-  "settings": []
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "t:labels.products_per_page",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    }
+  ]
 }
 {% endschema %}
