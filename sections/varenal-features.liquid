@@ -1,137 +1,168 @@
 {% comment %}
-  VARENAL Features Section
-  Three alternating image-text blocks showcasing product features.
-  Background: white. Animated with IntersectionObserver.
+  VARENAL Features v3 — Ultra-Creative
+  Three alternating image-text blocks with reveal animations,
+  floating chips, glass accents, and spring easing.
 {% endcomment %}
 
 <section id="how-it-works" class="varenal-features" {{ section.shopify_attributes }}>
-  <div class="varenal-features__container">
+  {%- comment -%} Subtle background pattern {%- endcomment -%}
+  <div class="feat__bg" aria-hidden="true">
+    <div class="feat__bg-gradient"></div>
+  </div>
+
+  <div class="feat__container">
+
+    {%- comment -%} Section header {%- endcomment -%}
+    <div class="feat__header animate-on-scroll" data-delay="0">
+      <span class="varenal-badge">TECNOLOGÍA AVANZADA</span>
+      <h2 class="feat__title">¿Por qué VARENAL es diferente?</h2>
+      <p class="feat__subtitle">Cada detalle fue diseñado con un solo propósito: que sientas alivio real desde el primer uso.</p>
+    </div>
 
     {%- comment -%} ===== BLOCK 1 — Image LEFT, Text RIGHT ===== {%- endcomment -%}
-    <div class="varenal-features__block varenal-features__block--img-left">
-      <div class="varenal-features__media" data-feature-animate="slideInLeft">
-        <div class="varenal-feature-img-wrap">
-          <div class="varenal-features__img-glow varenal-features__img-glow--orange" aria-hidden="true"></div>
+    <div class="feat__block feat__block--img-left">
+      <div class="feat__media animate-on-scroll" data-animate="left" data-delay="0">
+        <div class="feat__img-wrap">
+          <div class="feat__img-glow feat__img-glow--orange" aria-hidden="true"></div>
           {% if section.settings.image_1 %}
             {{ section.settings.image_1 | image_url: width: 900 | image_tag:
-              class: 'varenal-features__img',
+              class: 'feat__img',
               loading: 'lazy',
-              alt: 'VARENAL ankle massager heat therapy'
+              alt: 'VARENAL masajeador de tobillo con calor'
             }}
           {% else %}
-            <div class="varenal-features__img-placeholder">
-              {{ 'product-2' | placeholder_svg_tag }}
-            </div>
+            <div class="feat__img-placeholder">{{ 'product-2' | placeholder_svg_tag }}</div>
           {% endif %}
-          <span class="varenal-features__img-chip">
+          <span class="feat__chip feat__chip--bottom-right">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4v10.54a4 4 0 11-4 0V4a2 2 0 014 0z"/></svg>
             48°C → 53°C → 58°C
           </span>
         </div>
       </div>
 
-      <div class="varenal-features__text" data-feature-animate="slideInRight">
-        <span class="varenal-badge">{{ section.settings.badge_1 | default: 'SMART HEAT CONTROL' }}</span>
-        <h3 class="varenal-features__heading">
-          {{ section.settings.heading_1 | default: 'Three Temperature Modes. Zero Guesswork.' }}
+      <div class="feat__text animate-on-scroll" data-animate="right" data-delay="1">
+        <span class="feat__step-num">01</span>
+        <span class="varenal-badge feat__badge">{{ section.settings.badge_1 | default: 'CONTROL INTELIGENTE DE CALOR' }}</span>
+        <h3 class="feat__heading">
+          {{ section.settings.heading_1 | default: 'Tres modos de temperatura. Cero complicaciones.' }}
         </h3>
-        <p class="varenal-features__body">
-          {{ section.settings.body_1 | default: "Whether you need gentle warmth for daily comfort (48°C), therapeutic recovery (53°C), or deep tissue relief (58°C) — one tap on the LED touchscreen delivers the perfect temperature, instantly." }}
+        <p class="feat__body">
+          {{ section.settings.body_1 | default: 'Ya necesites calor suave para el confort diario (48°C), recuperación terapéutica (53°C) o alivio profundo (58°C) — un toque en la pantalla LED te da la temperatura perfecta, al instante.' }}
         </p>
-        <div class="varenal-features__pills" data-feature-animate="pills">
-          <span class="varenal-features__pill">🌡️ 48°C — Uso diario</span>
-          <span class="varenal-features__pill">🌡️ 53°C — Recuperación</span>
-          <span class="varenal-features__pill">🌡️ 58°C — Alivio intenso</span>
+        <div class="feat__pills animate-on-scroll" data-delay="3">
+          <span class="feat__pill feat__pill--active">🌡️ 48°C — Uso diario</span>
+          <span class="feat__pill">🌡️ 53°C — Recuperación</span>
+          <span class="feat__pill">🌡️ 58°C — Alivio intenso</span>
         </div>
       </div>
     </div>
 
     {%- comment -%} ===== BLOCK 2 — Text LEFT, Image RIGHT ===== {%- endcomment -%}
-    <div class="varenal-features__block varenal-features__block--img-right">
-      <div class="varenal-features__text" data-feature-animate="slideInLeft">
-        <span class="varenal-badge">{{ section.settings.badge_2 | default: 'CORDLESS FREEDOM' }}</span>
-        <h3 class="varenal-features__heading">
-          {{ section.settings.heading_2 | default: '2000mAh Battery. No Cords. No Limits.' }}
+    <div class="feat__block feat__block--img-right">
+      <div class="feat__text animate-on-scroll" data-animate="left" data-delay="0">
+        <span class="feat__step-num">02</span>
+        <span class="varenal-badge feat__badge">{{ section.settings.badge_2 | default: 'LIBERTAD INALÁMBRICA' }}</span>
+        <h3 class="feat__heading">
+          {{ section.settings.heading_2 | default: 'Batería de 2000mAh. Sin cables. Sin límites.' }}
         </h3>
-        <p class="varenal-features__body">
-          {{ section.settings.body_2 | default: 'Fully wireless with 2-hour fast charge providing 4–5 complete sessions. The large LED display shows real-time temperature and vibration level. Automatic 15-minute shutoff keeps every session safe.' }}
+        <p class="feat__body">
+          {{ section.settings.body_2 | default: 'Totalmente inalámbrico con carga rápida de 2 horas para 4–5 sesiones completas. La pantalla LED muestra temperatura y nivel de vibración en tiempo real. Apagado automático a los 15 minutos.' }}
         </p>
-        <div class="varenal-features__icon-row" data-feature-animate="pills">
-          <div class="varenal-features__icon-item">
-            <span class="varenal-features__icon-emoji">⚡</span>
-            <span class="varenal-features__icon-label">Carga rápida 2h</span>
+        <div class="feat__icon-grid animate-on-scroll" data-delay="2">
+          <div class="feat__icon-card">
+            <div class="feat__icon-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <span>Carga 2h</span>
           </div>
-          <div class="varenal-features__icon-item">
-            <span class="varenal-features__icon-emoji">🔋</span>
-            <span class="varenal-features__icon-label">4-5 sesiones</span>
+          <div class="feat__icon-card">
+            <div class="feat__icon-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="18" height="12" rx="2"/><line x1="6" y1="7" x2="6" y2="3"/><line x1="18" y1="7" x2="18" y2="3"/></svg>
+            </div>
+            <span>4-5 sesiones</span>
           </div>
-          <div class="varenal-features__icon-item">
-            <span class="varenal-features__icon-emoji">🛡️</span>
-            <span class="varenal-features__icon-label">Apagado automático</span>
+          <div class="feat__icon-card">
+            <div class="feat__icon-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <span>Auto-apagado</span>
           </div>
-          <div class="varenal-features__icon-item">
-            <span class="varenal-features__icon-emoji">📱</span>
-            <span class="varenal-features__icon-label">Pantalla LED</span>
+          <div class="feat__icon-card">
+            <div class="feat__icon-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <span>Pantalla LED</span>
           </div>
         </div>
       </div>
 
-      <div class="varenal-features__media" data-feature-animate="slideInRight">
-        <div class="varenal-feature-img-wrap">
-          <div class="varenal-features__img-glow varenal-features__img-glow--orange" aria-hidden="true"></div>
+      <div class="feat__media animate-on-scroll" data-animate="right" data-delay="1">
+        <div class="feat__img-wrap">
+          <div class="feat__img-glow feat__img-glow--teal" aria-hidden="true"></div>
           {% if section.settings.image_2 %}
             {{ section.settings.image_2 | image_url: width: 900 | image_tag:
-              class: 'varenal-features__img',
+              class: 'feat__img',
               loading: 'lazy',
-              alt: 'VARENAL cordless ankle pad LED display'
+              alt: 'VARENAL almohadilla inalámbrica con pantalla LED'
             }}
           {% else %}
-            <div class="varenal-features__img-placeholder">
-              {{ 'product-3' | placeholder_svg_tag }}
-            </div>
+            <div class="feat__img-placeholder">{{ 'product-3' | placeholder_svg_tag }}</div>
           {% endif %}
-          <span class="varenal-features__img-chip">
-            Inalámbrico • Recargable • Seguro
+          <span class="feat__chip feat__chip--bottom-left">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Inalámbrico • Recargable
           </span>
         </div>
       </div>
     </div>
 
     {%- comment -%} ===== BLOCK 3 — Image LEFT, Text RIGHT ===== {%- endcomment -%}
-    <div class="varenal-features__block varenal-features__block--img-left">
-      <div class="varenal-features__media" data-feature-animate="slideInLeft">
-        <div class="varenal-feature-img-wrap">
-          <div class="varenal-features__img-glow varenal-features__img-glow--teal" aria-hidden="true"></div>
+    <div class="feat__block feat__block--img-left">
+      <div class="feat__media animate-on-scroll" data-animate="left" data-delay="0">
+        <div class="feat__img-wrap">
+          <div class="feat__img-glow feat__img-glow--teal" aria-hidden="true"></div>
           {% if section.settings.image_3 %}
             {{ section.settings.image_3 | image_url: width: 900 | image_tag:
-              class: 'varenal-features__img',
+              class: 'feat__img',
               loading: 'lazy',
-              alt: 'VARENAL universal ankle fit neoprene'
+              alt: 'VARENAL ajuste universal de neopreno'
             }}
           {% else %}
-            <div class="varenal-features__img-placeholder">
-              {{ 'product-4' | placeholder_svg_tag }}
-            </div>
+            <div class="feat__img-placeholder">{{ 'product-4' | placeholder_svg_tag }}</div>
           {% endif %}
-          <span class="varenal-features__img-chip">
-            Compatible tobillo izquierdo y derecho
+          <span class="feat__chip feat__chip--bottom-right">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            Izquierdo & derecho
           </span>
         </div>
       </div>
 
-      <div class="varenal-features__text" data-feature-animate="slideInRight">
-        <span class="varenal-badge">{{ section.settings.badge_3 | default: 'UNIVERSAL FIT' }}</span>
-        <h3 class="varenal-features__heading">
-          {{ section.settings.heading_3 | default: 'Wraps Both Ankles. Stays Put All Day.' }}
+      <div class="feat__text animate-on-scroll" data-animate="right" data-delay="1">
+        <span class="feat__step-num">03</span>
+        <span class="varenal-badge feat__badge">{{ section.settings.badge_3 | default: 'AJUSTE UNIVERSAL' }}</span>
+        <h3 class="feat__heading">
+          {{ section.settings.heading_3 | default: 'Se adapta a ambos tobillos. Firme todo el día.' }}
         </h3>
-        <p class="varenal-features__body">
-          {{ section.settings.body_3 | default: 'The strong velcro buckle and breathable neoprene fabric adapt to any ankle size. A skin-friendly fleece lining ensures long-wear comfort on your left or right foot, for any body type.' }}
+        <p class="feat__body">
+          {{ section.settings.body_3 | default: 'La hebilla de velcro resistente y el neopreno transpirable se adaptan a cualquier tobillo. El forro de felpa suave con la piel asegura comodidad prolongada en pie izquierdo o derecho.' }}
         </p>
-        <div class="varenal-features__material-chips" data-feature-animate="pills">
-          <span class="varenal-features__mat-chip">Neopreno</span>
-          <span class="varenal-features__mat-chip">Forro de felpa</span>
-          <span class="varenal-features__mat-chip">Elástico OK</span>
-          <span class="varenal-features__mat-chip">Certificación CE</span>
-          <span class="varenal-features__mat-chip">Cumple RoHS</span>
+        <div class="feat__mat-chips animate-on-scroll" data-delay="3">
+          <span class="feat__mat-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Neopreno
+          </span>
+          <span class="feat__mat-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Forro de felpa
+          </span>
+          <span class="feat__mat-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Certificación CE
+          </span>
+          <span class="feat__mat-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Cumple RoHS
+          </span>
         </div>
       </div>
     </div>
@@ -141,65 +172,112 @@
 
 {% stylesheet %}
   /* ============================================
-     VARENAL FEATURES
+     VARENAL FEATURES v3 — Ultra-Creative
      ============================================ */
 
   .varenal-features {
+    position: relative;
     background: #FFFFFF;
     overflow: hidden;
   }
 
-  .varenal-features__container {
-    max-width: 1100px;
+  /* Subtle gradient bg */
+  .feat__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .feat__bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      #FFFFFF 0%,
+      #F4FAFB 30%,
+      #FFFFFF 60%,
+      #FFF8F5 80%,
+      #FFFFFF 100%
+    );
+  }
+
+  /* Container */
+  .feat__container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 60px 20px;
+    padding: 80px 20px;
     display: flex;
     flex-direction: column;
-    gap: 48px;
+    gap: 64px;
+  }
+
+  /* Section header */
+  .feat__header {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .feat__title {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 1.15;
+    color: var(--color-text, #2D2D2D);
+    margin-top: 20px;
+    margin-bottom: 16px;
+  }
+
+  .feat__subtitle {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-text-muted, #6B7280);
+    max-width: 520px;
+    margin: 0 auto;
   }
 
   /* --- Feature block --- */
-  .varenal-features__block {
+  .feat__block {
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    min-height: auto;
+    gap: 36px;
     align-items: center;
   }
 
   /* --- Media column --- */
-  .varenal-features__media {
-    width: 100%;
-    opacity: 0;
-  }
+  .feat__media { width: 100%; }
 
-  .varenal-feature-img-wrap {
+  .feat__img-wrap {
     position: relative;
     width: 100%;
     aspect-ratio: 5 / 4;
-    border-radius: 20px;
+    border-radius: 24px;
     overflow: hidden;
-    background: linear-gradient(135deg, #FF6B35 0%, #FF9A3C 100%);
+    background: linear-gradient(135deg, #F0F4F8 0%, #E8F4F6 100%);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+    transition: transform 0.5s var(--ease-spring), box-shadow 0.5s ease;
   }
 
-  .varenal-features__img-glow {
+  .feat__img-wrap:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 56px rgba(0, 0, 0, 0.12);
+  }
+
+  .feat__img-glow {
     position: absolute;
     inset: -30%;
     border-radius: 50%;
     pointer-events: none;
     z-index: 0;
+    opacity: 0.6;
   }
 
-  .varenal-features__img-glow--orange {
-    background: radial-gradient(circle, rgba(255, 107, 53, 0.25) 0%, transparent 65%);
-  }
+  .feat__img-glow--orange { background: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 65%); }
+  .feat__img-glow--teal   { background: radial-gradient(circle, rgba(0, 180, 200, 0.12) 0%, transparent 65%); }
 
-  .varenal-features__img-glow--teal {
-    background: radial-gradient(circle, rgba(0, 180, 200, 0.2) 0%, transparent 65%);
-  }
-
-  .varenal-features__img,
-  .varenal-features__img-placeholder {
+  .feat__img,
+  .feat__img-placeholder {
     position: relative;
     z-index: 1;
     width: 100%;
@@ -207,233 +285,226 @@
     object-fit: cover;
   }
 
-  .varenal-features__img-placeholder svg {
-    width: 100%;
-    height: 100%;
-  }
+  .feat__img-placeholder svg { width: 100%; height: 100%; }
 
   /* Floating chip inside image */
-  .varenal-features__img-chip {
+  .feat__chip {
     position: absolute;
-    bottom: 16px;
-    right: 16px;
     z-index: 2;
-    background: rgba(26, 26, 46, 0.85);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(26, 26, 46, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     color: #FFFFFF;
-    font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+    font-family: var(--font-tech);
     font-size: 12px;
     font-weight: 500;
-    padding: 8px 16px;
+    padding: 10px 18px;
     border-radius: 999px;
     white-space: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
+  .feat__chip svg { color: var(--color-primary-light, #33D4E8); }
+
+  .feat__chip--bottom-right { bottom: 16px; right: 16px; }
+  .feat__chip--bottom-left  { bottom: 16px; left: 16px; }
+
   /* --- Text column --- */
-  .varenal-features__text {
+  .feat__text {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 16px;
-    opacity: 0;
+    gap: 14px;
   }
 
-  .varenal-features__heading {
-    font-family: var(--font-heading, 'Montserrat', sans-serif);
+  .feat__step-num {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 56px;
+    line-height: 1;
+    background: linear-gradient(135deg, rgba(0,180,200,0.15) 0%, rgba(0,180,200,0.05) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.03em;
+  }
+
+  .feat__badge {
+    align-self: flex-start;
+  }
+
+  .feat__heading {
+    font-family: var(--font-heading);
     font-weight: 700;
     font-size: 26px;
     line-height: 1.2;
     color: var(--color-text, #2D2D2D);
   }
 
-  .varenal-features__body {
-    font-family: var(--font-body, 'Inter', sans-serif);
+  .feat__body {
+    font-family: var(--font-body);
     font-size: 16px;
-    line-height: 1.7;
+    line-height: 1.75;
     color: var(--color-text-muted, #6B7280);
     max-width: 480px;
   }
 
   /* Spec pills */
-  .varenal-features__pills {
+  .feat__pills {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 4px;
-    opacity: 0;
+    gap: 10px;
+    margin-top: 8px;
   }
 
-  .varenal-features__pill {
-    background: var(--color-primary, #00B4C8);
-    color: #FFFFFF;
-    font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+  .feat__pill {
+    background: #F0F4F8;
+    color: var(--color-text, #2D2D2D);
+    font-family: var(--font-tech);
     font-size: 13px;
     font-weight: 500;
-    padding: 6px 14px;
+    padding: 8px 16px;
     border-radius: 999px;
     white-space: nowrap;
+    border: 1px solid #E5E9ED;
+    transition: all 0.3s var(--ease-spring);
   }
 
-  /* Icon row */
-  .varenal-features__icon-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-top: 4px;
-    opacity: 0;
+  .feat__pill:hover,
+  .feat__pill--active {
+    background: var(--color-primary);
+    color: #FFFFFF;
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 180, 200, 0.2);
   }
 
-  .varenal-features__icon-item {
+  /* Icon grid */
+  .feat__icon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .feat__icon-card {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
+    padding: 14px 16px;
+    background: #F8FAFB;
+    border: 1px solid #E8EDF0;
+    border-radius: 14px;
+    transition: all 0.3s var(--ease-spring);
   }
 
-  .varenal-features__icon-emoji {
-    font-size: 18px;
+  .feat__icon-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(0, 180, 200, 0.3);
+    box-shadow: 0 6px 20px rgba(0, 180, 200, 0.1);
   }
 
-  .varenal-features__icon-label {
-    font-family: var(--font-body, 'Inter', sans-serif);
-    font-size: 14px;
-    color: var(--color-primary, #00B4C8);
+  .feat__icon-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(0, 180, 200, 0.1);
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .feat__icon-card span {
+    font-family: var(--font-body);
+    font-size: 13px;
     font-weight: 600;
+    color: var(--color-text, #2D2D2D);
   }
 
   /* Material chips */
-  .varenal-features__material-chips {
+  .feat__mat-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 4px;
-    opacity: 0;
+    gap: 10px;
+    margin-top: 8px;
   }
 
-  .varenal-features__mat-chip {
-    background: #F0F1F3;
-    color: var(--color-text, #2D2D2D);
-    font-family: var(--font-body, 'Inter', sans-serif);
+  .feat__mat-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #F0FAF5;
+    color: var(--color-success, #10B981);
+    font-family: var(--font-body);
     font-size: 13px;
-    font-weight: 500;
-    padding: 6px 14px;
+    font-weight: 600;
+    padding: 8px 16px;
     border-radius: 999px;
     white-space: nowrap;
+    border: 1px solid rgba(16, 185, 129, 0.15);
   }
-
-  /* --- Animate states --- */
-  .varenal-features__media.animate-slide-left {
-    animation: slideInLeft 0.7s ease-out forwards;
-  }
-
-  .varenal-features__media.animate-slide-right {
-    animation: slideInRight 0.7s ease-out forwards;
-  }
-
-  .varenal-features__text.animate-slide-left {
-    animation: slideInLeft 0.7s ease-out forwards;
-  }
-
-  .varenal-features__text.animate-slide-right {
-    animation: slideInRight 0.7s ease-out forwards;
-  }
-
-  .varenal-features__pills.animate-pills,
-  .varenal-features__icon-row.animate-pills,
-  .varenal-features__material-chips.animate-pills {
-    animation: fadeInUp 0.5s ease-out 0.3s forwards;
-  }
-
-  .varenal-features__pills.animate-pills .varenal-features__pill,
-  .varenal-features__material-chips.animate-pills .varenal-features__mat-chip {
-    animation: microBounce 0.4s ease-out forwards;
-  }
-
-  .varenal-features__pills.animate-pills .varenal-features__pill:nth-child(1),
-  .varenal-features__material-chips.animate-pills .varenal-features__mat-chip:nth-child(1) { animation-delay: 0.4s; }
-  .varenal-features__pills.animate-pills .varenal-features__pill:nth-child(2),
-  .varenal-features__material-chips.animate-pills .varenal-features__mat-chip:nth-child(2) { animation-delay: 0.5s; }
-  .varenal-features__pills.animate-pills .varenal-features__pill:nth-child(3),
-  .varenal-features__material-chips.animate-pills .varenal-features__mat-chip:nth-child(3) { animation-delay: 0.6s; }
-  .varenal-features__material-chips.animate-pills .varenal-features__mat-chip:nth-child(4) { animation-delay: 0.7s; }
-  .varenal-features__material-chips.animate-pills .varenal-features__mat-chip:nth-child(5) { animation-delay: 0.8s; }
 
   /* ========== Desktop ========== */
   @media (min-width: 769px) {
-    .varenal-features__container {
-      padding: 100px 40px;
+    .feat__container {
+      padding: 120px 40px;
       gap: 100px;
     }
 
-    .varenal-features__block {
+    .feat__title { font-size: 46px; }
+    .feat__subtitle { font-size: 18px; }
+
+    .feat__block {
       flex-direction: row;
-      gap: 48px;
-      min-height: 480px;
+      gap: 64px;
     }
 
-    .varenal-features__media,
-    .varenal-features__text {
+    .feat__media,
+    .feat__text {
       flex: 1;
       width: 50%;
     }
 
-    /* Image-right: text first in DOM */
-    .varenal-features__block--img-right .varenal-features__media {
+    .feat__block--img-right .feat__media {
       order: 1;
     }
 
-    .varenal-features__heading {
-      font-size: 32px;
-    }
+    .feat__heading { font-size: 34px; }
 
-    .varenal-features__body {
-      font-size: 17px;
-    }
+    .feat__body { font-size: 17px; }
+
+    .feat__step-num { font-size: 72px; }
   }
 {% endstylesheet %}
 
 {% javascript %}
   (function() {
     'use strict';
-
     var section = document.getElementById('how-it-works');
     if (!section) return;
 
-    var blocks = section.querySelectorAll('.varenal-features__block');
-    if (!blocks.length) return;
+    var targets = section.querySelectorAll('.animate-on-scroll');
+    if (!targets.length) return;
 
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
-        if (!entry.isIntersecting) return;
-
-        var block = entry.target;
-        var media = block.querySelector('.varenal-features__media');
-        var text = block.querySelector('.varenal-features__text');
-        var pills = block.querySelector('[data-feature-animate="pills"]');
-
-        var isImgLeft = block.classList.contains('varenal-features__block--img-left');
-
-        if (media) {
-          media.classList.add(isImgLeft ? 'animate-slide-left' : 'animate-slide-right');
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
-        if (text) {
-          text.classList.add(isImgLeft ? 'animate-slide-right' : 'animate-slide-left');
-        }
-        if (pills) {
-          pills.classList.add('animate-pills');
-        }
-
-        observer.unobserve(block);
       });
     }, {
-      threshold: 0.2,
-      rootMargin: '0px 0px -40px 0px'
+      threshold: 0.1,
+      rootMargin: '0px 0px -60px 0px'
     });
 
-    blocks.forEach(function(block) {
-      observer.observe(block);
-    });
+    targets.forEach(function(el) { observer.observe(el); });
   })();
 {% endjavascript %}
 
@@ -445,12 +516,12 @@
   "settings": [
     {
       "type": "header",
-      "content": "Feature block 1 — Smart heat control"
+      "content": "Feature 1 — Control de calor"
     },
     {
       "type": "image_picker",
       "id": "image_1",
-      "label": "Image 1"
+      "label": "Imagen 1"
     },
     {
       "type": "text",
@@ -461,23 +532,23 @@
     {
       "type": "text",
       "id": "heading_1",
-      "label": "Heading 1",
+      "label": "Título 1",
       "default": "Tres modos de temperatura. Cero complicaciones."
     },
     {
       "type": "textarea",
       "id": "body_1",
-      "label": "Body 1",
+      "label": "Descripción 1",
       "default": "Ya necesites calor suave para el confort diario (48°C), recuperación terapéutica (53°C) o alivio profundo (58°C) — un toque en la pantalla LED te da la temperatura perfecta, al instante."
     },
     {
       "type": "header",
-      "content": "Feature block 2 — Cordless freedom"
+      "content": "Feature 2 — Libertad inalámbrica"
     },
     {
       "type": "image_picker",
       "id": "image_2",
-      "label": "Image 2"
+      "label": "Imagen 2"
     },
     {
       "type": "text",
@@ -488,23 +559,23 @@
     {
       "type": "text",
       "id": "heading_2",
-      "label": "Heading 2",
+      "label": "Título 2",
       "default": "Batería de 2000mAh. Sin cables. Sin límites."
     },
     {
       "type": "textarea",
       "id": "body_2",
-      "label": "Body 2",
+      "label": "Descripción 2",
       "default": "Totalmente inalámbrico con carga rápida de 2 horas para 4–5 sesiones completas. La pantalla LED muestra temperatura y nivel de vibración en tiempo real. Apagado automático a los 15 minutos."
     },
     {
       "type": "header",
-      "content": "Feature block 3 — Universal fit"
+      "content": "Feature 3 — Ajuste universal"
     },
     {
       "type": "image_picker",
       "id": "image_3",
-      "label": "Image 3"
+      "label": "Imagen 3"
     },
     {
       "type": "text",
@@ -515,13 +586,13 @@
     {
       "type": "text",
       "id": "heading_3",
-      "label": "Heading 3",
+      "label": "Título 3",
       "default": "Se adapta a ambos tobillos. Firme todo el día."
     },
     {
       "type": "textarea",
       "id": "body_3",
-      "label": "Body 3",
+      "label": "Descripción 3",
       "default": "La hebilla de velcro resistente y el neopreno transpirable se adaptan a cualquier tobillo. El forro de felpa suave con la piel asegura comodidad prolongada en pie izquierdo o derecho."
     }
   ],
