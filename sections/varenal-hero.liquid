@@ -189,7 +189,7 @@
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    padding: 100px 20px 60px;
+    padding: 60px 20px 48px;
   }
 
   /* ---------- Image column ---------- */
@@ -258,7 +258,17 @@
     padding: 8px 16px;
     border-radius: 999px;
     white-space: nowrap;
+    max-width: calc(100% - 32px);
+    overflow: hidden;
+    text-overflow: ellipsis;
     opacity: 0;
+  }
+
+  @media (max-width: 480px) {
+    .varenal-hero__spec-chip {
+      font-size: 10px;
+      padding: 6px 12px;
+    }
   }
 
   .varenal-hero__spec-chip.animate {

@@ -1,4 +1,4 @@
-<header class="header" id="header">
+<header class="header full-width" id="header">
   <div class="header__inner">
     <a href="{{ routes.root_url }}" class="header__logo">
       {% if settings.logo %}
@@ -165,21 +165,24 @@
     display: none;
     flex-direction: column;
     justify-content: center;
-    gap: 5px;
+    gap: 6px;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 4px;
-    width: 28px;
+    padding: 10px;
+    width: 44px;
+    height: 44px;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .header__mobile-toggle span {
     display: block;
-    width: 100%;
-    height: 2px;
-    background: var(--color-foreground);
+    width: 24px;
+    height: 2.5px;
+    background: var(--color-foreground, #2D2D2D);
     border-radius: 2px;
     transition: all 0.3s ease;
+    pointer-events: none;
   }
 
   .header__mobile-toggle.active span:nth-child(1) {
@@ -204,26 +207,30 @@
     }
 
     .header__nav {
-      position: fixed;
-      top: 60px;
+      position: absolute;
+      top: 100%;
       left: 0;
       right: 0;
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.99);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       flex-direction: column;
-      padding: 2rem;
+      padding: 1.5rem 2rem 2rem;
       gap: 1.2rem;
-      transform: translateY(-100%);
+      transform: translateY(-10px);
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
       z-index: 999;
       border-bottom: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
     }
 
     .header__nav.active {
       transform: translateY(0);
       opacity: 1;
+      visibility: visible;
       pointer-events: all;
     }
 
