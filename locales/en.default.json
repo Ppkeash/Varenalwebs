@@ -134,5 +134,25 @@
       "trust_returns": "60 días de devolución",
       "trust_secure": "Pago seguro"
     }
+  },
+  "products": {
+    "reviews": "reseñas",
+    "save": "Ahorra",
+    "option": "Opción",
+    "quantity": "Cantidad",
+    "add_to_cart": "Agregar al Carrito",
+    "sold_out": "Agotado",
+    "thumbnail": "Imagen {{ number }}",
+    "features": {
+      "heat_levels": "3 Niveles de Calor (48°C–58°C)",
+      "wireless": "Inalámbrico y Recargable",
+      "led_control": "Control por Pantalla LED Táctil",
+      "auto_shutoff": "Apagado Automático 15 min"
+    },
+    "trust": {
+      "free_shipping": "Envío Gratis",
+      "guarantee": "Garantía 30 Días",
+      "secure_payment": "Pago Seguro"
+    }
   }
 }
