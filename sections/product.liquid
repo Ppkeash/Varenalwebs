@@ -5,11 +5,47 @@
 <div class="product-page varenal-section">
   <div class="product-page__grid">
     <div class="product-page__gallery">
-      {% for image in product.images %}
-        <div class="product-page__image-wrap {% if forloop.first %}product-page__image-wrap--main{% endif %}">
-          {% render 'image', class: 'product-page__image', image: image %}
+      {%- assign current_variant = product.selected_or_first_available_variant -%}
+      {%- if current_variant.featured_image -%}
+        {%- assign featured_image = current_variant.featured_image -%}
+      {%- else -%}
+        {%- assign featured_image = product.featured_image -%}
+      {%- endif -%}
+
+      <div class="product-page__image-wrap product-page__image-wrap--main" id="product-main-image">
+        <img
+          src="{{ featured_image | image_url: width: 900 }}"
+          alt="{{ featured_image.alt | default: product.title | escape }}"
+          width="{{ featured_image.width }}"
+          height="{{ featured_image.height }}"
+          class="product-page__image"
+          id="product-main-img"
+          loading="eager"
+        >
+      </div>
+
+      {% if product.images.size > 1 %}
+        <div class="product-page__thumbnails" id="product-thumbnails">
+          {% for image in product.images %}
+            <button
+              type="button"
+              class="product-page__thumb {% if image == featured_image %}product-page__thumb--active{% endif %}"
+              data-image-url="{{ image | image_url: width: 900 }}"
+              data-image-alt="{{ image.alt | default: product.title | escape }}"
+              data-image-id="{{ image.id }}"
+              aria-label="Imagen {{ forloop.index }}"
+            >
+              <img
+                src="{{ image | image_url: width: 150 }}"
+                alt="{{ image.alt | default: product.title | escape }}"
+                width="150"
+                height="150"
+                loading="lazy"
+              >
+            </button>
+          {% endfor %}
         </div>
-      {% endfor %}
+      {% endif %}
     </div>
 
     <div class="product-page__info">
@@ -26,15 +62,15 @@
         <span class="product-page__rating-text">4.8 (128 reseñas)</span>
       </div>
 
-      <div class="product-page__price">
+      <div class="product-page__price" id="product-price">
         {% if product.compare_at_price > product.price %}
-          <span class="product-page__price-old">{{ product.compare_at_price | money }}</span>
-          <span class="product-page__price-sale">{{ product.price | money }}</span>
-          <span class="product-page__price-save">
+          <span class="product-page__price-old" id="price-compare">{{ product.compare_at_price | money }}</span>
+          <span class="product-page__price-sale" id="price-current">{{ product.price | money }}</span>
+          <span class="product-page__price-save" id="price-save">
             Ahorra {{ product.compare_at_price | minus: product.price | money }}
           </span>
         {% else %}
-          <span class="product-page__price-current">{{ product.price | money }}</span>
+          <span class="product-page__price-current" id="price-current">{{ product.price | money }}</span>
         {% endif %}
       </div>
 
@@ -62,8 +98,6 @@
       </div>
 
       {% form 'product', product %}
-        {% assign current_variant = product.selected_or_first_available_variant %}
-
         {% if product.variants.size > 1 %}
           <div class="product-page__variants">
             <label for="variant-select" class="product-page__label">Opción:</label>
@@ -71,11 +105,20 @@
               {% for variant in product.variants %}
                 <option
                   value="{{ variant.id }}"
-                  {% if variant == current_variant %}
-                    selected="selected"
+                  {% if variant == current_variant %}selected="selected"{% endif %}
+                  data-price="{{ variant.price | money }}"
+                  data-compare-price="{{ variant.compare_at_price | money }}"
+                  data-compare-price-raw="{{ variant.compare_at_price }}"
+                  data-price-raw="{{ variant.price }}"
+                  {% if variant.featured_image %}
+                    data-image-id="{{ variant.featured_image.id }}"
+                    data-image-url="{{ variant.featured_image | image_url: width: 900 }}"
+                    data-image-alt="{{ variant.featured_image.alt | default: variant.title | escape }}"
                   {% endif %}
+                  {% unless variant.available %}disabled{% endunless %}
                 >
                   {{ variant.title }} - {{ variant.price | money }}
+                  {% unless variant.available %} (Agotado){% endunless %}
                 </option>
               {% endfor %}
             </select>
@@ -89,8 +132,16 @@
           <input type="number" id="qty" name="quantity" min="1" value="1" class="product-page__qty-input">
         </div>
 
-        <button type="submit" class="btn-varenal-primary product-page__add-btn">
-          Agregar al Carrito — {{ current_variant.price | money }}
+        <button type="submit" class="btn-varenal-primary product-page__add-btn" id="add-to-cart-btn"
+          data-add-text="Agregar al Carrito"
+          data-sold-out="Agotado"
+          {% unless current_variant.available %}disabled{% endunless %}
+        >
+          {% if current_variant.available %}
+            Agregar al Carrito — {{ current_variant.price | money }}
+          {% else %}
+            Agotado
+          {% endif %}
         </button>
 
         {{ form | payment_button }}
@@ -125,6 +176,8 @@
   .product-page__gallery {
     display: grid;
     gap: 1rem;
+    position: sticky;
+    top: 100px;
   }
 
   .product-page__image-wrap {
@@ -144,11 +197,52 @@
     width: 100%;
     height: auto;
     border-radius: 20px;
-    transition: transform 0.6s ease;
+    transition: transform 0.6s ease, opacity 0.4s ease;
+  }
+
+  .product-page__image.is-switching {
+    opacity: 0;
+    transform: scale(0.97);
   }
 
   .product-page__image-wrap:hover .product-page__image {
     transform: scale(1.03);
+  }
+
+  /* Thumbnails */
+  .product-page__thumbnails {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .product-page__thumb {
+    width: 72px;
+    height: 72px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    cursor: pointer;
+    background: #F4F6F8;
+    padding: 0;
+    transition: border-color 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  }
+
+  .product-page__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .product-page__thumb--active {
+    border-color: var(--color-primary, #00B4C8);
+    box-shadow: 0 0 0 3px rgba(0, 180, 200, 0.15);
+  }
+
+  .product-page__thumb:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 180, 200, 0.4);
   }
 
   .product-page__badge {
@@ -196,6 +290,7 @@
     align-items: baseline;
     gap: 0.8rem;
     margin-bottom: 1.5rem;
+    flex-wrap: wrap;
   }
 
   .product-page__price-current,
@@ -207,12 +302,14 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    transition: opacity 0.3s ease;
   }
 
   .product-page__price-old {
     font-size: 1.2rem;
     color: var(--color-text-muted, #6B7280);
     text-decoration: line-through;
+    transition: opacity 0.3s ease;
   }
 
   .product-page__price-save {
@@ -223,6 +320,7 @@
     font-size: 0.8rem;
     font-weight: 600;
     border: 1px solid rgba(229, 62, 62, 0.1);
+    transition: opacity 0.3s ease;
   }
 
   .product-page__description {
@@ -342,6 +440,10 @@
       gap: 1.5rem;
     }
 
+    .product-page__gallery {
+      position: static;
+    }
+
     .product-page__info {
       order: -1;
     }
@@ -359,6 +461,15 @@
       font-size: 1.4rem;
     }
 
+    .product-page__thumbnails {
+      justify-content: center;
+    }
+
+    .product-page__thumb {
+      width: 60px;
+      height: 60px;
+    }
+
     .product-page__trust-badges {
       gap: 0.75rem;
       flex-wrap: wrap;
@@ -374,6 +485,96 @@
     }
   }
 {% endstylesheet %}
+
+{% javascript %}
+  (function() {
+    var select = document.getElementById('variant-select');
+    var mainImg = document.getElementById('product-main-img');
+    var thumbnails = document.getElementById('product-thumbnails');
+    var addBtn = document.getElementById('add-to-cart-btn');
+    var priceCurrent = document.getElementById('price-current');
+    var priceCompare = document.getElementById('price-compare');
+    var priceSave = document.getElementById('price-save');
+
+    if (!select || !mainImg) return;
+
+    function switchImage(url, alt, imageId) {
+      if (!url) return;
+
+      mainImg.classList.add('is-switching');
+
+      setTimeout(function() {
+        mainImg.src = url;
+        mainImg.alt = alt || '';
+        mainImg.classList.remove('is-switching');
+      }, 300);
+
+      if (thumbnails && imageId) {
+        var thumbs = thumbnails.querySelectorAll('.product-page__thumb');
+        thumbs.forEach(function(thumb) {
+          thumb.classList.remove('product-page__thumb--active');
+          if (thumb.getAttribute('data-image-id') === String(imageId)) {
+            thumb.classList.add('product-page__thumb--active');
+          }
+        });
+      }
+    }
+
+    select.addEventListener('change', function() {
+      var option = this.options[this.selectedIndex];
+      var imageUrl = option.getAttribute('data-image-url');
+      var imageAlt = option.getAttribute('data-image-alt');
+      var imageId = option.getAttribute('data-image-id');
+      var price = option.getAttribute('data-price');
+      var comparePrice = option.getAttribute('data-compare-price');
+      var priceRaw = parseInt(option.getAttribute('data-price-raw'), 10);
+      var comparePriceRaw = parseInt(option.getAttribute('data-compare-price-raw'), 10);
+
+      if (imageUrl) {
+        switchImage(imageUrl, imageAlt, imageId);
+      }
+
+      if (priceCurrent && price) {
+        priceCurrent.textContent = price;
+      }
+
+      if (priceCompare && comparePriceRaw && comparePriceRaw > priceRaw) {
+        priceCompare.textContent = comparePrice;
+        priceCompare.style.display = '';
+        if (priceSave) {
+          priceSave.style.display = '';
+        }
+      } else if (priceCompare) {
+        priceCompare.style.display = 'none';
+        if (priceSave) {
+          priceSave.style.display = 'none';
+        }
+      }
+
+      if (addBtn) {
+        var isDisabled = option.disabled;
+        addBtn.disabled = isDisabled;
+        if (isDisabled) {
+          addBtn.textContent = addBtn.getAttribute('data-sold-out') || 'Agotado';
+        } else {
+          addBtn.textContent = (addBtn.getAttribute('data-add-text') || 'Agregar al Carrito') + ' \u2014 ' + price;
+        }
+      }
+    });
+
+    if (thumbnails) {
+      thumbnails.addEventListener('click', function(e) {
+        var thumb = e.target.closest('.product-page__thumb');
+        if (!thumb) return;
+
+        var url = thumb.getAttribute('data-image-url');
+        var alt = thumb.getAttribute('data-image-alt');
+        var id = thumb.getAttribute('data-image-id');
+        switchImage(url, alt, id);
+      });
+    }
+  })();
+{% endjavascript %}
 
 {% schema %}
 {
