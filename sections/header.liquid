@@ -22,19 +22,19 @@
 
     <div class="header__actions">
       {% if shop.customer_accounts_enabled %}
-        <a href="{{ routes.account_url }}" class="header__icon" aria-label="Account">
+        <a href="{{ routes.account_url }}" class="header__icon" aria-label="Cuenta">
           {{ 'icon-account.svg' | inline_asset_content }}
         </a>
       {% endif %}
 
-      <a href="{{ routes.cart_url }}" class="header__icon header__cart" aria-label="Cart">
+      <a href="{{ routes.cart_url }}" class="header__icon header__cart" aria-label="Carrito">
         {{ 'icon-cart.svg' | inline_asset_content }}
         {% if cart.item_count > 0 %}
           <span class="header__cart-count">{{ cart.item_count }}</span>
         {% endif %}
       </a>
 
-      <button class="header__mobile-toggle" id="mobile-toggle" aria-label="Menu" onclick="document.getElementById('nav-menu').classList.toggle('active'); this.classList.toggle('active');">
+      <button class="header__mobile-toggle" id="mobile-toggle" aria-label="Menú" onclick="document.getElementById('nav-menu').classList.toggle('active'); this.classList.toggle('active');">
         <span></span>
         <span></span>
         <span></span>

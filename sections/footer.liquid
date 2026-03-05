@@ -17,22 +17,22 @@
     </div>
 
     <div class="footer__links-col">
-      <h4 class="footer__heading">{{ section.settings.col1_title | default: 'Quick Links' }}</h4>
+      <h4 class="footer__heading">{{ section.settings.col1_title | default: 'Enlaces rápidos' }}</h4>
       {% for link in section.settings.menu.links %}
         <a href="{{ link.url }}" class="footer__link">{{ link.title }}</a>
       {% endfor %}
     </div>
 
     <div class="footer__links-col">
-      <h4 class="footer__heading">{{ section.settings.col2_title | default: 'Support' }}</h4>
+      <h4 class="footer__heading">{{ section.settings.col2_title | default: 'Soporte' }}</h4>
       {% for link in section.settings.menu_2.links %}
         <a href="{{ link.url }}" class="footer__link">{{ link.title }}</a>
       {% endfor %}
     </div>
 
     <div class="footer__newsletter">
-      <h4 class="footer__heading">{{ section.settings.newsletter_title | default: 'Stay Updated' }}</h4>
-      <p class="footer__newsletter-text">{{ section.settings.newsletter_text | default: 'Get exclusive deals and wellness tips.' }}</p>
+      <h4 class="footer__heading">{{ section.settings.newsletter_title | default: 'Mantente al día' }}</h4>
+      <p class="footer__newsletter-text">{{ section.settings.newsletter_text | default: 'Recibe ofertas exclusivas y consejos de bienestar.' }}</p>
       {% form 'customer', id: 'footer-newsletter' %}
         <div class="footer__newsletter-form">
           <input
@@ -41,7 +41,7 @@
             placeholder="Tu correo electrónico"
             required
             class="footer__newsletter-input"
-            aria-label="Email"
+            aria-label="Correo electrónico"
           >
           <input type="hidden" name="contact[tags]" value="newsletter">
           <button type="submit" class="footer__newsletter-btn">→</button>
@@ -255,7 +255,7 @@
     {
       "type": "text",
       "id": "tagline",
-      "label": "Tagline",
+      "label": "Eslogan",
       "default": "Tecnología innovadora de bienestar para tu confort diario."
     },
     {
@@ -266,30 +266,30 @@
     {
       "type": "text",
       "id": "col1_title",
-      "label": "Column 1 title",
+      "label": "Título columna 1",
       "default": "Enlaces Rápidos"
     },
     {
       "type": "link_list",
       "id": "menu_2",
-      "label": "Support menu"
+      "label": "Menú de soporte"
     },
     {
       "type": "text",
       "id": "col2_title",
-      "label": "Column 2 title",
+      "label": "Título columna 2",
       "default": "Soporte"
     },
     {
       "type": "text",
       "id": "newsletter_title",
-      "label": "Newsletter title",
+      "label": "Título del boletín",
       "default": "Mantente al Día"
     },
     {
       "type": "textarea",
       "id": "newsletter_text",
-      "label": "Newsletter text",
+      "label": "Texto del boletín",
       "default": "Recibe ofertas exclusivas y consejos de bienestar en tu bandeja de entrada."
     },
     {

@@ -40,7 +40,7 @@
         {%- liquid
           if section.settings.hero_image
             assign display_image = section.settings.hero_image
-            assign display_alt = section.settings.hero_image.alt | default: 'VARENAL Wireless Ankle Heating Pad'
+            assign display_alt = section.settings.hero_image.alt | default: 'VARENAL masajeador de tobillo con calor'
           elsif hero_product_image
             assign display_image = hero_product_image
             assign display_alt = hero_product_image.alt | default: hero_product.title
@@ -135,7 +135,7 @@
       {%- comment -%} 6. CTA buttons {%- endcomment -%}
       <div class="hero__cta-block" data-hero-animate="cta">
         <a href="{{ cta_href }}" class="btn-varenal-primary hero__cta-primary">
-          {{ section.settings.cta_primary_text | default: 'Comprar ahora — Alivio instantáneo' }}
+          {{ section.settings.cta_primary_text | default: '¡Compra ahora!' }}
         </a>
         <a href="#how-it-works" class="btn-varenal-ghost hero__cta-ghost">
           {{ section.settings.cta_secondary_text | default: 'Descubre cómo funciona ↓' }}
@@ -150,7 +150,7 @@
         </span>
         <span class="hero__trust-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="m16 8 5 3-5 3V8z"/></svg>
-          {{ section.settings.trust_text_2 | default: 'Envío en 24h' }}
+          {{ section.settings.trust_text_2 | default: 'Envío gratis' }}
         </span>
         <span class="hero__trust-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
@@ -164,7 +164,7 @@
 {%- comment -%} Sticky Buy Now CTA {%- endcomment -%}
 <div class="buy-now-sticky" id="buy-now-sticky">
   <a href="{{ cta_href }}" class="btn-varenal-primary">
-    {{ section.settings.cta_primary_text | default: 'Comprar ahora — Alivio instantáneo' }}
+    {{ section.settings.cta_primary_text | default: '¡Compra ahora!' }}
     {% if hero_product %}<span class="buy-now-sticky__price">— {{ hero_product_price }}</span>{% endif %}
   </a>
 </div>
@@ -719,7 +719,7 @@
       "type": "text",
       "id": "cta_primary_text",
       "label": "Texto CTA principal",
-      "default": "Comprar ahora — Alivio instantáneo"
+      "default": "¡Compra ahora!"
     },
     {
       "type": "url",
@@ -742,7 +742,7 @@
       "type": "text",
       "id": "trust_text_2",
       "label": "Trust texto 2",
-      "default": "Envío en 24h"
+      "default": "Envío gratis"
     },
     {
       "type": "text",

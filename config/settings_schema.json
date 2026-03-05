@@ -24,7 +24,7 @@
         "type": "font_picker",
         "id": "type_heading_font",
         "default": "poppins_n6",
-        "label": "Heading font"
+        "label": "Fuente de títulos"
       }
     ]
   },
@@ -78,19 +78,19 @@
         "type": "color",
         "id": "color_primary",
         "default": "#2db5a3",
-        "label": "Primary brand color"
+        "label": "Color primario"
       },
       {
         "type": "color",
         "id": "color_secondary",
         "default": "#5bc87a",
-        "label": "Secondary brand color"
+        "label": "Color secundario"
       },
       {
         "type": "color",
         "id": "color_accent",
         "default": "#16a085",
-        "label": "Accent color"
+        "label": "Color de acento"
       },
       {
         "type": "range",
@@ -105,12 +105,12 @@
     ]
   },
   {
-    "name": "Brand Logo",
+    "name": "Logotipo",
     "settings": [
       {
         "type": "image_picker",
         "id": "logo",
-        "label": "Logo"
+        "label": "Logotipo"
       },
       {
         "type": "range",
@@ -119,13 +119,13 @@
         "max": 300,
         "step": 10,
         "unit": "px",
-        "label": "Logo width",
+        "label": "Ancho del logotipo",
         "default": 160
       },
       {
         "type": "image_picker",
         "id": "favicon",
-        "label": "Favicon"
+        "label": "Icono del sitio"
       }
     ]
   }
