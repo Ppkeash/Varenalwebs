@@ -1,203 +1,391 @@
-# varenalreadme
+# VARENAL — Documentación del Proyecto
 
-Documentación completa del proyecto VARENAL — tema Shopify personalizado para el masajeador de tobillo con calor inalámbrico.
-
----
-
-## 1. Visión General del Proyecto
-
-**Marca:** VARENAL  
-**Producto:** Masajeador de tobillo con calor inalámbrico (Electric Ankle Heating Massage Pad)  
-**Objetivo:** Construir una tienda de dropshipping global de bienestar, comenzando con este producto.  
-**Idioma del tema:** Español  
-**Estado actual:** Tema completo subido a GitHub y empujado a Shopify como tema de desarrollo.
+Documentación completa del tema Shopify personalizado para la marca VARENAL.  
+Última actualización: 4 de marzo de 2026.
 
 ---
 
-## 2. Identidad de Marca
+## 1. Visión General
 
-| Elemento       | Valor                          |
-|----------------|-------------------------------|
-| Color primario | `#2db5a3` (verde azulado)     |
-| Color secundario | `#5bc87a` (verde)           |
-| Color acento   | `#16a085` (verde oscuro)      |
-| Color de texto | `#1a1a2e` (casi negro)        |
-| Fuente títulos | Poppins (peso 600)            |
-| Fuente cuerpo  | Work Sans (peso 400)          |
+| Campo | Detalle |
+|---|---|
+| **Marca** | VARENAL |
+| **Producto principal** | Almohadilla de calor inalámbrica para tobillo (CL-2888) |
+| **Modelo de negocio** | Dropshipping vía AutoDS desde AliExpress |
+| **Tiempo de envío real** | ~14 días |
+| **Idioma del tema** | Español (archivo locale: `es.default.json`) |
+| **Mercado objetivo** | Latinoamérica (inicialmente Colombia) |
+| **Estado** | Tema conectado a Shopify vía GitHub, publicado como tema de desarrollo |
 
-### Especificaciones del Producto
+### Propósito
+
+Crear una tienda online de bienestar con un tema Shopify 2.0 completamente personalizado, optimizado para conversión, 100% en español, con diseño premium y animaciones modernas. El enfoque es un embudo de ventas de una sola página (landing page → producto → compra).
+
+### Especificaciones del Producto CL-2888
+
 - 3 niveles de calor: 48°C / 53°C / 58°C
 - Vibración terapéutica
 - Pantalla LED táctil
-- Batería 2000mAh (inalámbrico)
+- Batería 2000mAh (inalámbrico, recargable)
 - Apagado automático a los 15 minutos
 - Forro de felpa suave
 - Diseño universal (ambos tobillos)
 
 ---
 
+## 2. Identidad Visual (Design System v3.0)
+
+### Colores
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--color-primary` | `#00B4C8` | CTAs, enlaces, acentos |
+| `--color-dark` | `#1A1A2E` | Fondos oscuros, texto principal |
+| `--color-accent` | `#FF6B35` | Badges, urgencia, precios de descuento |
+| `--color-text` | `#2D2D2D` | Texto body |
+| `--color-text-muted` | `#6B7280` | Texto secundario |
+| `--gradient-brand` | `#00B4C8 → #0090A0` | Gradiente de marca en botones y precios |
+
+### Tipografía
+
+| Rol | Fuente | Peso |
+|---|---|---|
+| Títulos | Montserrat | 700–800 |
+| Cuerpo | Inter | 400–500 |
+| Técnica/badges | Space Grotesk | 600 |
+
+### Animaciones
+
+El tema usa un sistema de animaciones rico basado en CSS:
+- **Spring easing** (`cubic-bezier(0.34, 1.56, 0.64, 1)`) para hover y microinteracciones
+- **morphBlob** — animación orgánica de formas de fondo
+- **pulseGlow** — efecto de brillo pulsante en CTAs
+- **shimmerSweep** — barrido de brillo en botones
+- **fadeInUp / fadeInLeft / fadeInRight** — scroll animations con 5 tiempos de stagger
+- **Glass-morphism** — efectos de vidrio esmerilado en cards
+- `prefers-reduced-motion` respetado para accesibilidad
+
+---
+
 ## 3. Infraestructura Técnica
 
-### Herramientas Instaladas
-| Herramienta      | Versión     |
-|------------------|-------------|
-| Node.js          | v22.15.0    |
-| npm              | 10.9.0      |
-| Git              | 2.49.0      |
-| Shopify CLI      | v3.91.0     |
+### Plataformas y Repositorio
 
-### Shopify
-- **Tienda:** `ic11en-e6.myshopify.com`
-- **Cuenta:** `valbuenaesteban19@gmail.com`
-- **ID del tema de desarrollo:** `157417144569`
-- **Nombre del tema:** `Development (648e0b-Ppkeash)`
-- **Tema activo publicado (preinstalado):** Dwell (`ID: 157405217017`) — aún en vivo al momento del último push
+| Servicio | Detalle |
+|---|---|
+| **Shopify** | `ic11en-e6.myshopify.com` |
+| **GitHub** | `https://github.com/Ppkeash/Varenalwebs` (rama `main`) |
+| **Directorio local** | `C:\Users\yeval\...\varenal-theme\` |
+| **Cuenta Shopify** | `valbuenaesteban19@gmail.com` |
+| **Cuenta GitHub** | `Ppkeash` |
 
-> **Nota:** Existe un tercer tema roto llamado "VARENAL" (creado por un push fallido con `--unpublished`). Muestra una página 404 y debe ser eliminado desde el Admin de Shopify → Temas.
+### Herramientas
 
-### GitHub
-- **Repositorio:** `https://github.com/Ppkeash/Varenalwebs`
-- **Cuenta GitHub:** `Ppkeash`
-- **Rama principal:** `main`
-- **Último commit:** `b72d84f` — "VARENAL theme - Masajeador de tobillo con calor inalámbrico (tema completo en español)"
+| Herramienta | Versión |
+|---|---|
+| Node.js | v22.15.0 |
+| Git | 2.49.0 |
+| Shopify CLI | v3.91.0 |
 
-### Directorio Local
-```
-C:\Users\yeval\OneDrive\Escritorio\Escritorio\My\DROPSHIPPING\2026\pagina\varenal-theme\
-```
+### Conexión Shopify ↔ GitHub
+
+El tema está conectado directamente desde Shopify Admin → Temas → "Conectar desde GitHub". Esto significa que:
+- Los cambios pusheados a `main` se sincronizan automáticamente con Shopify
+- Shopify también puede pushear cambios al repo (ediciones desde el theme editor)
+- Esos pushes de Shopify pueden inyectar comentarios `/* ... */` en archivos JSON (inválidos) — se deben eliminar si aparecen
 
 ---
 
 ## 4. Estructura del Tema
 
-El tema está basado en el skeleton de **Dawn** (Shopify CLI v3), con todas las secciones personalizadas para VARENAL.
-
 ```
 varenal-theme/
 ├── assets/
-│   └── critical.css              # CSS de marca VARENAL (colores, botones, animaciones)
+│   ├── critical.css                  # Reset CSS, tipografía base, grid del layout
+│   └── varenal-design-system.css     # Design system v3.0 completo (colores, botones, animaciones)
 ├── blocks/
-│   ├── group.liquid
-│   └── text.liquid
+│   ├── group.liquid                  # Wrapper flex horizontal/vertical para bloques anidados
+│   └── text.liquid                   # Bloque de texto con estilos (título/subtítulo/normal)
 ├── config/
-│   ├── settings_data.json        # Datos de configuración activos (colores, fuentes)
-│   └── settings_schema.json      # Esquema de personalización del tema
+│   ├── settings_data.json            # Datos activos del tema (valores del theme editor)
+│   └── settings_schema.json          # Esquema de personalización (fuentes, colores, logo)
 ├── layout/
-│   ├── theme.liquid              # Layout principal (meta tags, fuentes, favicon)
-│   └── password.liquid
+│   ├── theme.liquid                  # Layout principal: head, fonts, CSS, body
+│   └── password.liquid               # Layout de página de contraseña
 ├── locales/
-│   ├── en.default.json
-│   └── en.default.schema.json
+│   ├── es.default.json               # Traducciones de la tienda (español)
+│   └── es.default.schema.json        # Traducciones del editor del tema (español)
 ├── sections/
-│   ├── hero-banner.liquid        # Hero con CTA principal
-│   ├── trust-bar.liquid          # Barra de estadísticas de confianza
-│   ├── features-grid.liquid      # 6 tarjetas de características del producto
-│   ├── product-showcase.liquid   # 3 bloques alternados con imagen y texto
-│   ├── how-it-works.liquid       # 3 pasos de uso
-│   ├── testimonials.liquid       # 3 reseñas de clientes
-│   ├── faq-accordion.liquid      # 6 preguntas frecuentes
-│   ├── cta-banner.liquid         # Banner de llamada a la acción con gradiente
-│   ├── announcement-bar.liquid   # Barra superior de anuncio
-│   ├── product.liquid            # Página de producto personalizada
-│   ├── header.liquid             # Cabecera sticky con logo, hamburguesa, carrito
-│   ├── footer.liquid             # Pie de página 4 columnas + newsletter
-│   ├── header-group.json         # Configuración del grupo de cabecera
-│   ├── footer-group.json         # Configuración del grupo de pie
-│   └── [otras secciones base]    # 404, article, blog, cart, collection, etc.
+│   ├── header.liquid                 # Header sticky: logo, menú hamburguesa, carrito
+│   ├── announcement-bar.liquid       # Barra de anuncio superior (envío gratis)
+│   ├── footer.liquid                 # Footer 4 columnas + newsletter + iconos de pago
+│   ├── header-group.json             # Grupo: announcement-bar → header
+│   ├── footer-group.json             # Grupo: footer
+│   ├── product.liquid                # Página de producto con galería, variantes, carrito
+│   ├── collection.liquid             # Grid de colección con filtros y paginación
+│   ├── cart.liquid                   # Página del carrito
+│   ├── blog.liquid                   # Listado de artículos del blog
+│   ├── article.liquid                # Página individual de artículo
+│   ├── search.liquid                 # Página de búsqueda
+│   ├── page.liquid                   # Páginas estáticas
+│   ├── collections.liquid            # Lista de todas las colecciones
+│   ├── 404.liquid                    # Página de error 404
+│   └── password.liquid               # Página de contraseña de la tienda
 ├── snippets/
-│   ├── css-variables.liquid      # Variables CSS con colores y fuentes de marca
-│   ├── image.liquid
-│   └── meta-tags.liquid
+│   ├── css-variables.liquid          # Variables CSS dinámicas desde settings
+│   ├── image.liquid                  # Componente de imagen responsive
+│   └── meta-tags.liquid              # OpenGraph, Twitter Cards, structured data
 ├── templates/
-│   ├── index.json                # Homepage con 8 secciones en español
-│   ├── product.json
-│   └── [otras templates]
-├── .gitignore
-├── .gitattributes
-├── .shopifyignore
-├── .theme-check.yml
-└── varenalreadme.md              # Este archivo
+│   ├── index.json                    # Homepage: embudo de 5 secciones VARENAL
+│   ├── product.json                  # Plantilla de producto
+│   ├── collection.json               # Plantilla de colección
+│   ├── cart.json                     # Plantilla del carrito
+│   ├── blog.json                     # Plantilla del blog
+│   ├── article.json                  # Plantilla de artículo
+│   ├── search.json                   # Plantilla de búsqueda
+│   ├── page.json                     # Plantilla de páginas
+│   ├── password.json                 # Plantilla de contraseña
+│   ├── list-collections.json         # Plantilla de lista de colecciones
+│   ├── 404.json                      # Plantilla de error 404
+│   └── gift_card.liquid              # Tarjeta de regalo (standalone)
+└── varenalreadme.md                  # Este archivo
 ```
 
 ---
 
-## 5. Secciones del Homepage (index.json)
+## 5. Homepage — Embudo de Conversión
 
-El homepage está compuesto por las siguientes secciones en orden:
+El homepage (`templates/index.json`) está diseñado como un embudo de ventas de una sola página con 5 secciones personalizadas:
 
-1. **hero** (`hero-banner`) — "Alivia el Dolor de Tobillo con Calor Terapéutico y Vibración"
-2. **trust_bar** (`trust-bar`) — Clientes Felices / Valoración 4.8★ / Garantía 30 días / Envío Mundial
-3. **features** (`features-grid`) — 6 características: Calor, Apagado Auto, Inalámbrico, LED Táctil, Ajuste Universal, Larga Batería
-4. **showcase** (`product-showcase`) — Alivio Localizado / Diseño Inteligente / Confort Premium
-5. **how_it_works** (`how-it-works`) — Envuelve / Elige / Relájate (3 pasos)
-6. **testimonials** (`testimonials`) — Sara M. / Jaime R. / María L.
-7. **faq** (`faq-accordion`) — 6 preguntas frecuentes sobre el producto
-8. **cta** (`cta-banner`) — "¿Listo Para Sentir la Diferencia? — Pedir Ahora, Envío Gratis"
+### Flujo de secciones
 
----
+| # | Sección | Tipo | Propósito |
+|---|---|---|---|
+| 1 | **VARENAL Hero** | `varenal-hero` | Impacto visual + CTA principal. Product picker conectado, badge, headline, prueba social, chips de specs, barra de confianza (3 items: envío gratis, garantía, certificación) |
+| 2 | **Puntos de Dolor** | `varenal-pain-points` | Identificar el problema del usuario. 4 cards con emoji, título y cuerpo describiendo situaciones de dolor |
+| 3 | **Características** | `varenal-features` | Mostrar la solución. 3 bloques con imagen, badge y texto descriptivo de las features del producto |
+| 4 | **Reseñas** | `varenal-reviews` | Prueba social. 6 reseñas humanizadas con historias reales, barra de stats (4.8★, 2,300+ verificadas, 96% recomendación) |
+| 5 | **CTA Final** | `varenal-final-cta` | Cierre de venta. Product picker, imagen, badges de confianza, CTA prominente |
 
-## 6. Bugs Resueltos
+### Las 6 Reseñas (humanizadas)
 
-### Bug 1: Error de sintaxis Liquid en product-showcase.liquid
-**Problema:** `{% if forloop.index0 | modulo: 2 == 1 %}` — Liquid no soporta filtros con operadores de comparación en la misma expresión.  
-**Solución:**
-```liquid
-{% assign row_mod = forloop.index0 | modulo: 2 %}
-{% if row_mod == 1 %}
-```
+Las reseñas están escritas con lenguaje coloquial latinoamericano para generar autenticidad:
 
-### Bug 2: Servidor de desarrollo (`shopify theme dev`) con ERR_CONNECTION_REFUSED
-**Problema:** El servidor local nunca fue accesible en ningún puerto (3000, 9292, 4000). Probablemente relacionado con OneDrive, firewall, o el path con espacios.  
-**Solución adoptada:** Usar `shopify theme push` directamente en lugar del servidor de desarrollo. Funciona sin problemas.
+1. **Carolina R.** ★★★★★ — Enfermera 7 años, colega le mostró el producto, llora de alivio tras usar
+2. **Andrés M.** ★★★★★ — Se lastimó el tobillo jugando basketball, el fisio le preguntó qué usaba
+3. **María L.** ★★★★★ — Lo compró para gym, su mamá de 72 años se lo quitó para la artritis, tuvo que pedir otro
+4. **Diego S.** ★★★★☆ — Honesto sobre el envío (~2 semanas), desea más colores, pero el producto cumple lo prometido
+5. **Ana P.** ★★★★★ — Regalo para la abuela, la abuela llamó 3 días después agradecida
+6. **Sebastián V.** ★★★★★ — CrossFit 5-6 veces/semana, la novia también lo usa
 
-### Bug 3: Tema roto "VARENAL" con página 404
-**Problema:** Un push con `--unpublished` creó un tema vacío que muestra 404.  
-**Solución pendiente:** Eliminar manualmente desde Shopify Admin → Temas.
-
-### Bug 4: Codificación en PowerShell
-**Problema:** `Set-Content` puede corromper emojis (✨ → `?`, ★ → `?`) si no se especifica `-Encoding UTF8`.  
-**Estado:** Los archivos finales están correctos (verificado con grep). No hubo corrupción real.
+> **Nota estratégica:** La reseña de Diego (4★) maneja honestamente la expectativa de envío sin decir "14 días" explícitamente. Dice "tardó como 2 semanas".
 
 ---
 
-## 7. Flujo de Trabajo para Futuras Actualizaciones
+## 6. Página de Producto
 
-### Editar el tema localmente y subir a Shopify:
+La sección `product.liquid` incluye:
+
+- **Galería de imágenes** con thumbnails y cambio de imagen al seleccionar variante (con animación fade)
+- **Selector de variantes** con dropdown que actualiza imagen, precio y botón dinámicamente
+- **Precio dinámico** con compare_at_price, badge de "Ahorra X", precio tachado
+- **Mini features** con íconos SVG: 3 niveles de calor, inalámbrico, LED táctil, apagado automático
+- **Botón de agregar al carrito** con precio y estado dinámico (agotado/disponible)
+- **Botón de pago rápido** de Shopify (`payment_button`)
+- **Badges de confianza**: Envío Gratis, Garantía 60 Días, Pago Seguro
+- **Responsive**: En mobile, la info va primero y la galería después
+- **JavaScript**: Cambio de variante → actualiza imagen (con transición), precio, botón. Thumbnails clickeables.
+
+---
+
+## 7. Secciones Globales
+
+### Header (`header.liquid`)
+- Logo con enlace al inicio
+- Navegación con menú configurable desde Shopify
+- Menú hamburguesa en mobile con overlay
+- Íconos de cuenta y carrito con counter dinámico
+- Header sticky con sombra al scrollear
+- Todos los aria-labels en español
+
+### Footer (`footer.liquid`)
+- 4 columnas: Marca (logo + descripción) / Enlaces rápidos / Soporte / Newsletter
+- Formulario de suscripción a newsletter
+- Línea de copyright
+- Íconos de métodos de pago
+- Todo en español
+
+### Announcement Bar (`announcement-bar.liquid`)
+- Barra superior con texto configurable
+- Default: "Envío gratis en todos los pedidos"
+
+---
+
+## 8. Secciones Estándar
+
+| Sección | Descripción |
+|---|---|
+| `collection.liquid` | Grid responsive de productos con filtrado y paginación |
+| `cart.liquid` | Tabla de carrito con actualización de cantidades, nota del pedido, botón de checkout |
+| `blog.liquid` | Grid de artículos con imagen, título, fecha, extracto |
+| `article.liquid` | Artículo individual con imagen hero, contenido, compartir en redes, comentarios |
+| `search.liquid` | Búsqueda con formulario y grid de resultados |
+| `page.liquid` | Contenido de página estática |
+| `collections.liquid` | Lista de todas las colecciones con imagen y título |
+| `404.liquid` | Mensaje de error con CTA para volver al inicio |
+| `password.liquid` | Página de contraseña para tiendas en desarrollo |
+
+---
+
+## 9. Sistema de Traducción
+
+### Arquitectura
+
+- Archivo de traducciones: `locales/es.default.json`
+- Archivo de traducciones del editor: `locales/es.default.schema.json`
+- **Todo el texto visible al usuario** usa filtro `{{ 'clave' | t }}`
+- El archivo se llama `es.default` para que Shopify reconozca español como idioma base
+
+### Cobertura de traducciones
+
+Todas las áreas están traducidas al español:
+- Secciones del homepage (hero, reseñas, features, etc.)
+- Carrito, checkout prompt, formularios
+- Blog, artículos, comentarios
+- Búsqueda, colección, paginación
+- Errores 404, contraseña
+- Footer, header, meta tags
+- Schema labels del editor del tema
+
+### Nota sobre el checkout
+
+El checkout de Shopify no se controla desde el tema. Para que el checkout esté en español:
+1. Shopify Admin → Settings → Languages
+2. Agregar Español como idioma principal
+3. Esto traduce checkout, emails y notificaciones
+
+---
+
+## 10. Problemas Resueltos
+
+### Fase 1-3: Setup inicial y primera versión
+- **Error de sintaxis Liquid**: `{% if forloop.index0 | modulo: 2 == 1 %}` — se separó en assign + if
+- **ERR_CONNECTION_REFUSED en `shopify theme dev`**: Conflicto con OneDrive/firewall. Solución: usar `shopify theme push` directamente
+- **Tema roto "VARENAL"**: Push con `--unpublished` creó tema vacío. Se eliminó manualmente
+- **Codificación PowerShell**: `Set-Content` corrompía emojis sin `-Encoding UTF8`
+
+### Fase 4: Rediseño VARENAL + español
+- Se crearon 5 secciones custom del embudo de conversión
+- Se eliminaron 10 secciones genéricas no usadas (hello-world, hero-banner, cta-banner, testimonials, custom-section, faq-accordion, features-grid, how-it-works, product-showcase, trust-bar)
+- Traducción completa al español
+
+### Fase 5: Conexión producto → CTA
+- Los botones CTA del hero y final-cta no enlazaban a nada (`#`)
+- Se añadió product picker a ambas secciones
+- Auto-detección del primer producto de la tienda como fallback
+
+### Fase 6: Consistencia de diseño
+- Todas las secciones de templates (cart, collection, blog, etc.) se rediseñaron con el design system VARENAL
+
+### Fase 7: Mobile responsiveness
+- Overhaul completo de responsive: hero, pain points, features, reviews, final CTA, header, product, cart, collection, blog, article, search
+
+### Fase 8: Animaciones v3.0
+- Spring easing, glass-morphism, SVG icons, gradient text, pulse rings, morphing blobs
+- Design system CSS consolidado en `varenal-design-system.css`
+- Nombres latinos en reseñas, limpieza de CSS duplicado
+
+### Fase 9: Variant image switching
+- Cambio de imagen al seleccionar variante (con animación fade)
+- Thumbnails clickeables
+- Precio dinámico con compare_at_price
+- Se implementó → se revirtió → se restauró (por conflictos)
+
+### Fase 10: Ajuste de envío, español completo, reseñas
+- **Envío**: Se eliminó "Envío en 24h" (falso, el producto tarda ~14 días). Reemplazado por "Envío gratis"
+- **Español**: Se encontraron y corrigieron restos en inglés en 11 archivos (aria-labels, defaults, alt text, schema labels, meta tags)
+- **Reseñas**: Se reescribieron las 6 reseñas con historias personales creíbles y lenguaje coloquial latino
+
+### Fase 11: Correcciones técnicas
+- **Comentarios JSON inválidos**: Shopify inyectó bloques `/* ... */` en 15 archivos JSON al sincronizar. Se eliminaron todos
+- **Idioma del tema**: Archivos de locale renombrados de `en.default.*` → `es.default.*` para que Shopify reconozca español como idioma base
+
+---
+
+## 11. Lo que NO tiene el tema
+
+- **No hay app de reseñas** — las reseñas están hardcodeadas en la sección `varenal-reviews.liquid`. No se recolectan de clientes reales.
+- **No hay blog creado** — la sección existe pero no hay contenido
+- **No hay páginas estáticas** — no hay páginas de "Sobre nosotros", "Política de envío", etc.
+- **No hay tracking de conversión** — no hay Google Analytics, Meta Pixel, ni TikTok Pixel configurados
+- **No hay email marketing** — el formulario de newsletter del footer no está conectado a ningún servicio (Klaviyo, Mailchimp, etc.)
+- **No hay chat en vivo** — no hay widget de soporte
+- **No hay multi-idioma** — solo español. No hay traducción al inglés u otros idiomas
+- **No hay descuentos automáticos** — no hay lógica de códigos de cupón o descuentos por volumen
+- **Checkout en inglés** — se controla desde Shopify Admin → Languages, no desde el tema
+
+---
+
+## 12. Flujo de Trabajo
+
+### Hacer cambios y subir
+
 ```powershell
 # 1. Ir al directorio del tema
 cd "C:\Users\yeval\OneDrive\Escritorio\Escritorio\My\DROPSHIPPING\2026\pagina\varenal-theme"
 
-# 2. Hacer cambios en los archivos
+# 2. Editar archivos
 
-# 3. Verificar que no hay errores Liquid
-shopify theme check
-
-# 4. Subir a Shopify (sin sobreescribir archivos del editor)
-shopify theme push --store ic11en-e6.myshopify.com --theme 157417144569 --nodelete
-
-# 5. Guardar cambios en GitHub
+# 3. Commit y push a GitHub (Shopify sincroniza automáticamente)
 git add -A
 git commit -m "descripción del cambio"
 git push
 ```
 
-### Para publicar el tema como activo (hacer que los visitantes lo vean):
-Shopify Admin → Tienda Online → Temas → Tema `Development (648e0b-Ppkeash)` → **Publicar**
+### Subir directamente a Shopify (sin GitHub)
 
-### Importar desde GitHub a Shopify (si se reinicia el entorno):
-Shopify Admin → Tienda Online → Temas → Agregar tema → **Conectar desde GitHub** → Seleccionar repo `Ppkeash/Varenalwebs` → Rama `main`
+```powershell
+shopify theme push --store ic11en-e6.myshopify.com --theme <THEME_ID> --nodelete
+```
+
+### Reconectar desde GitHub (si se pierde la conexión)
+
+Shopify Admin → Tienda Online → Temas → Agregar tema → Conectar desde GitHub → `Ppkeash/Varenalwebs` → rama `main`
 
 ---
 
-## 8. Pendientes
+## 13. Historial de Commits
 
-- [ ] **Publicar el tema** como activo (reemplazar el tema Dwell)
-- [ ] **Eliminar el tema "VARENAL" roto** (el que muestra 404) desde Shopify Admin
-- [ ] **Subir logo de VARENAL** en el personalizador del tema (formato SVG o PNG transparente recomendado)
-- [ ] **Subir imágenes del producto** al tema (hero banner image, imágenes del product-showcase)
-- [ ] **Crear el producto** en Shopify Admin → Productos → Agregar producto (con variantes de talla/color)
-- [ ] **Cambiar nombre de la tienda** de "Mi tienda" a "VARENAL" en Configuración → General
-- [ ] **Configurar dominio** personalizado si aplica
+```
+7084f3d fix: rename locale files en.default → es.default
+4f84607 fix: remove invalid JSON comments from 15 files
+a86ee00 fix: traducción completa al español, ajuste de envío y reseñas humanizadas
+234ed38 feat: restore variant image switching + thumbnails
+9863be4 revert: remove variant image switching
+5c53b07 feat: variant image switching + thumbnails + price update
+8f409bb Phase 7: Creative animation overhaul v3
+514323d fix: comprehensive mobile responsiveness overhaul
+5c15359 feat: redesign all template sections for VARENAL design consistency
+6558e02 fix: auto-detect product for CTA buttons
+df4f4c0 feat: connect homepage sections to Shopify product
+8dbb5ba cleanup: remove 10 unused sections
+ae9fc29 feat: rediseño completo VARENAL + traducción al español
+c4f9d9d docs: agregar varenalreadme
+b72d84f VARENAL theme - initial commit
+```
+
+---
+
+## 14. Pendientes
+
+- [ ] Configurar idioma español en Shopify Admin → Settings → Languages (para checkout y emails)
+- [ ] Crear páginas legales: Política de envío, Política de devoluciones, Términos y condiciones, Política de privacidad
+- [ ] Crear página "Sobre nosotros"
+- [ ] Conectar newsletter a servicio de email (Klaviyo / Mailchimp)
+- [ ] Instalar píxeles de tracking (Google Analytics, Meta Pixel)
+- [ ] Crear contenido de blog para SEO
+- [ ] Configurar dominio personalizado
+- [ ] Considerar app de reseñas reales (Judge.me, Loox) a futuro
 - [ ] **Configurar métodos de pago** y opciones de envío
 - [ ] **Optimizar SEO**: meta title y description para el homepage y producto
 
